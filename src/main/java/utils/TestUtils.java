@@ -3,17 +3,23 @@ package utils;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.PointerInput.MouseButton;
 import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebElement;
 
 import base.BaseTest;
 
@@ -98,5 +104,24 @@ public class TestUtils extends BaseTest {
 	        }
 	    }
 	
+	    public static boolean scrollToText(String text, int maxScrolls) throws InterruptedException {
+	        String uiScrollable = "new UiScrollable(new UiSelector().scrollable(true).instance(0))";
+	        String uiSelector = ".scrollTextIntoView(new UiSelector().textContains(\"" + text + "\").instance(0))";
+	        String command = uiScrollable + uiSelector;
+
+	        for (int i = 0; i < maxScrolls; i++) {
+	            try {
+	                // Execute the UiScrollable command
+	                driver.findElement(AppiumBy.androidUIAutomator(command));
+	                Thread.sleep(500); // Add a pause for Flutter
+	                if (driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")).isDisplayed()) {
+	                    return true;
+	                }
+	            } catch (Exception e) {
+	                // Keep scrolling
+	            }
+	        }
+	        return false;
+	    }
 	    
 }

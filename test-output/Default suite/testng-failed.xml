@@ -6,6 +6,7 @@
       <class name="tests.teleConE2ETest">
         <methods>
           <include name="setup"/>
+          <include name="teardown"/>
           <include name="medicoPositiveFlow"/>
         </methods>
       </class> <!-- tests.teleConE2ETest -->

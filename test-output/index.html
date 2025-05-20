@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Default_suite" class="navigator-link">
-              <span class="suite-name border-skipped">Default suite</span>
+              <span class="suite-name border-failed">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\Bhairu Chougale\AppData\Local\Temp\testng-eclipse--746642016\testng-customsuite.xml</span>
+                    <span>C:\Users\Bhairu Chougale\AppData\Local\Temp\testng-eclipse--1492050572\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -92,21 +92,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,  1 skipped,  </span>
+                    <span class="method-stats">1 method, 1 failed,   </span>
                   </li>
                   <li>
-                    <span class="method-list-title skipped">Skipped methods</span>
-                    <span class="show-or-hide-methods skipped">
-                      <a href="#" panel-name="suite-Default_suite" class="hide-methods skipped suite-Default_suite"> (hide)</a> <!-- hide-methods skipped suite-Default_suite -->
-                      <a href="#" panel-name="suite-Default_suite" class="show-methods skipped suite-Default_suite"> (show)</a> <!-- show-methods skipped suite-Default_suite -->
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
                     </span>
-                    <div class="method-list-content skipped suite-Default_suite">
+                    <div class="method-list-content failed suite-Default_suite">
                       <span>
-                        <img src="skipped.png" width="3%"/>
+                        <img src="failed.png" width="3%"/>
                         <a href="#" panel-name="suite-Default_suite" title="tests.teleConE2ETest" class="method navigator-link" hash-for-method="medicoPositiveFlow">medicoPositiveFlow</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content skipped suite-Default_suite -->
+                    </div> <!-- method-list-content failed suite-Default_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -118,9 +118,9 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
-          <div class="suite-Default_suite-class-skipped">
+          <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="skipped.png"/>
+              <img src="failed.png"/>
               <span class="class-name">tests.teleConE2ETest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
@@ -129,28 +129,44 @@
                   <a name="medicoPositiveFlow">
                   </a> <!-- medicoPositiveFlow -->
                   <span class="method-name">medicoPositiveFlow</span>
-                  <div class="stack-trace">org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure. 
-Host info: host: &apos;LAPTOP-VM9OBF6R&apos;, ip: &apos;192.168.1.7&apos;
+                  <div class="stack-trace">org.openqa.selenium.InvalidArgumentException: The following required parameters are missing: [&quot;strategy&quot;,&quot;selector&quot;]
+Known required parameters are: [&quot;strategy&quot;,&quot;selector&quot;]
+Known optional parameters are: [&quot;elementId&quot;,&quot;maxSwipes&quot;]
+You have provided none
 Build info: version: &apos;4.32.0&apos;, revision: &apos;d17c8aa950&apos;
 System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;18.0.1&apos;
 Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:noReset: false, appium:systemPort: 8100, appium:udid: emulator-5554, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:noReset: false, appium:systemPort: 8100, appium:udid: emulator-5554, platformName: ANDROID}
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:563)
-	at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
-	at org.openqa.selenium.remote.RemoteWebDriver.&lt;init&gt;(RemoteWebDriver.java:174)
-	at io.appium.java_client.AppiumDriver.&lt;init&gt;(AppiumDriver.java:101)
-	at io.appium.java_client.AppiumDriver.&lt;init&gt;(AppiumDriver.java:113)
-	at io.appium.java_client.android.AndroidDriver.&lt;init&gt;(AndroidDriver.java:109)
-	at base.BaseTest.setupAndroidDriver(BaseTest.java:45)
-	at base.BaseTest.setup(BaseTest.java:27)
+Command: [3f48647f-3437-497f-8e30-e0249f535fdc, executeScript {script=mobile: scroll, args=[{direction=down}]}]
+Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.manastik.dadt.MainActivity, appPackage: com.manastik.dadt, autoGrantPermissions: true, automationName: UIAutomator2, noReset: false, platformName: ANDROID, systemPort: 8201, udid: emulator-5554}, appium:deviceApiLevel: 31, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 440, appium:deviceScreenSize: 1080x2280, appium:deviceUDID: emulator-5554, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:noReset: false, appium:pixelRatio: 2.75, appium:platformVersion: 12, appium:statBarHeight: 83, appium:systemPort: 8201, appium:takesScreenshot: true, appium:udid: emulator-5554, appium:viewportRect: {height: 2197, left: 0, top: 83, width: 1080}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3f48647f-3437-497f-8e30-e0249f535fdc
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:67)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:243)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebDriver.executeScript(RemoteWebDriver.java:476)
+	at utils.TestUtils.swipeAction(TestUtils.java:132)
+	at tests.teleConE2ETest.medicoPositiveFlow(teleConE2ETest.java:74)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:390)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:325)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:382)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
 	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
 	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
 	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
@@ -161,50 +177,16 @@ Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPack
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: java.io.UncheckedIOException: java.net.ConnectException
-	at org.openqa.selenium.remote.http.jdk.JdkHttpClient.execute0(JdkHttpClient.java:500)
-	at io.appium.java_client.internal.filters.AppiumIdempotencyFilter.lambda$apply$0(AppiumIdempotencyFilter.java:35)
-	at io.appium.java_client.internal.filters.AppiumUserAgentFilter.lambda$apply$0(AppiumUserAgentFilter.java:87)
-	at org.openqa.selenium.remote.http.Filter.lambda$andFinally$1(Filter.java:55)
-	at org.openqa.selenium.remote.http.jdk.JdkHttpClient.lambda$executeAsync$2(JdkHttpClient.java:387)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-Caused by: java.net.ConnectException
-	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:571)
-	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:123)
-	at org.openqa.selenium.remote.http.jdk.JdkHttpClient.execute0(JdkHttpClient.java:459)
-	... 9 more
-Caused by: java.net.ConnectException
-	at java.net.http/jdk.internal.net.http.common.Utils.toConnectException(Utils.java:1045)
-	at java.net.http/jdk.internal.net.http.PlainHttpConnection.connectAsync(PlainHttpConnection.java:198)
-	at java.net.http/jdk.internal.net.http.PlainHttpConnection.checkRetryConnect(PlainHttpConnection.java:230)
-	at java.net.http/jdk.internal.net.http.PlainHttpConnection.lambda$connectAsync$1(PlainHttpConnection.java:206)
-	at java.base/java.util.concurrent.CompletableFuture.uniHandle(CompletableFuture.java:934)
-	at java.base/java.util.concurrent.CompletableFuture$UniHandle.tryFire(CompletableFuture.java:911)
-	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:510)
-	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1773)
-	... 3 more
-Caused by: java.nio.channels.ClosedChannelException
-	at java.base/sun.nio.ch.SocketChannelImpl.ensureOpen(SocketChannelImpl.java:195)
-	at java.base/sun.nio.ch.SocketChannelImpl.beginConnect(SocketChannelImpl.java:760)
-	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:848)
-	at java.net.http/jdk.internal.net.http.PlainHttpConnection.lambda$connectAsync$0(PlainHttpConnection.java:183)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
-	at java.net.http/jdk.internal.net.http.PlainHttpConnection.connectAsync(PlainHttpConnection.java:185)
-	... 9 more
 
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Default_suite-class-skipped -->
+          </div> <!-- suite-Default_suite-class-failed -->
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\Bhairu Chougale\AppData\Local\Temp\testng-eclipse--746642016\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\Bhairu Chougale\AppData\Local\Temp\testng-eclipse--1492050572\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -261,12 +243,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'medicoPositiveFlow')
 data.setCell(0, 2, 'tests.teleConE2ETest')
-data.setCell(0, 3, 0);
+data.setCell(0, 3, 40174);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 0 ms</span>
+              <span class="suite-total-time">Total running time: 40 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -294,11 +276,19 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">tests.teleConE2ETest</div> <!-- chronological-class-name -->
               <div class="configuration-suite before">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">setup</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">medicoPositiveFlow</span>
+                <span class="method-start">25179 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-suite after">
+                <span class="method-name">teardown</span>
+                <span class="method-start">65440 ms</span>
+              </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->

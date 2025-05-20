@@ -1,130 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="0" skipped="1">
+<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-05-18T15:14:24 IST" name="Default suite" finished-at="2025-05-18T15:14:24 IST" duration-ms="52">
+  <suite started-at="2025-05-20T08:46:19 IST" name="Default suite" finished-at="2025-05-20T08:46:59 IST" duration-ms="40211">
     <groups>
     </groups>
-    <test started-at="2025-05-18T15:14:24 IST" name="Default test" finished-at="2025-05-18T15:14:24 IST" duration-ms="52">
+    <test started-at="2025-05-20T08:46:19 IST" name="Default test" finished-at="2025-05-20T08:46:59 IST" duration-ms="40211">
       <class name="tests.teleConE2ETest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:tests.teleConE2ETest@74e52ef6]" started-at="2025-05-18T15:14:23 IST" name="setup" finished-at="2025-05-18T15:14:24 IST" duration-ms="621" status="FAIL">
-          <exception class="org.openqa.selenium.SessionNotCreatedException">
-            <message>
-              <![CDATA[Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure. 
-Host info: host: 'LAPTOP-VM9OBF6R', ip: '192.168.1.7'
-Build info: version: '4.32.0', revision: 'd17c8aa950'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '18.0.1'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:noReset: false, appium:systemPort: 8100, appium:udid: emulator-5554, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:noReset: false, appium:systemPort: 8100, appium:udid: emulator-5554, platformName: ANDROID}]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure. 
-Host info: host: 'LAPTOP-VM9OBF6R', ip: '192.168.1.7'
-Build info: version: '4.32.0', revision: 'd17c8aa950'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '18.0.1'
-Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:noReset: false, appium:systemPort: 8100, appium:udid: emulator-5554, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:noReset: false, appium:systemPort: 8100, appium:udid: emulator-5554, platformName: ANDROID}
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:563)
-at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
-at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:174)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
-at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
-at base.BaseTest.setupAndroidDriver(BaseTest.java:45)
-at base.BaseTest.setup(BaseTest.java:27)
-at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-at java.base/java.lang.reflect.Method.invoke(Method.java:577)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:390)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:325)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:382)
-at org.testng.SuiteRunner.run(SuiteRunner.java:336)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
-at org.testng.TestNG.runSuites(TestNG.java:1114)
-at org.testng.TestNG.run(TestNG.java:1082)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: java.io.UncheckedIOException: java.net.ConnectException
-at org.openqa.selenium.remote.http.jdk.JdkHttpClient.execute0(JdkHttpClient.java:500)
-at io.appium.java_client.internal.filters.AppiumIdempotencyFilter.lambda$apply$0(AppiumIdempotencyFilter.java:35)
-at io.appium.java_client.internal.filters.AppiumUserAgentFilter.lambda$apply$0(AppiumUserAgentFilter.java:87)
-at org.openqa.selenium.remote.http.Filter.lambda$andFinally$1(Filter.java:55)
-at org.openqa.selenium.remote.http.jdk.JdkHttpClient.lambda$executeAsync$2(JdkHttpClient.java:387)
-at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:833)
-Caused by: java.net.ConnectException
-at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:571)
-at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:123)
-at org.openqa.selenium.remote.http.jdk.JdkHttpClient.execute0(JdkHttpClient.java:459)
-... 9 more
-Caused by: java.net.ConnectException
-at java.net.http/jdk.internal.net.http.common.Utils.toConnectException(Utils.java:1045)
-at java.net.http/jdk.internal.net.http.PlainHttpConnection.connectAsync(PlainHttpConnection.java:198)
-at java.net.http/jdk.internal.net.http.PlainHttpConnection.checkRetryConnect(PlainHttpConnection.java:230)
-at java.net.http/jdk.internal.net.http.PlainHttpConnection.lambda$connectAsync$1(PlainHttpConnection.java:206)
-at java.base/java.util.concurrent.CompletableFuture.uniHandle(CompletableFuture.java:934)
-at java.base/java.util.concurrent.CompletableFuture$UniHandle.tryFire(CompletableFuture.java:911)
-at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:510)
-at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1773)
-... 3 more
-Caused by: java.nio.channels.ClosedChannelException
-at java.base/sun.nio.ch.SocketChannelImpl.ensureOpen(SocketChannelImpl.java:195)
-at java.base/sun.nio.ch.SocketChannelImpl.beginConnect(SocketChannelImpl.java:760)
-at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:848)
-at java.net.http/jdk.internal.net.http.PlainHttpConnection.lambda$connectAsync$0(PlainHttpConnection.java:183)
-at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
-at java.net.http/jdk.internal.net.http.PlainHttpConnection.connectAsync(PlainHttpConnection.java:185)
-... 9 more
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.teleConE2ETest@79079097]" started-at="2025-05-20T08:45:54 IST" name="setup" finished-at="2025-05-20T08:46:19 IST" duration-ms="25153" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="medicoPositiveFlow()[pri:0, instance:tests.teleConE2ETest@74e52ef6]" started-at="2025-05-18T15:14:24 IST" name="medicoPositiveFlow" finished-at="2025-05-18T15:14:24 IST" duration-ms="0" status="SKIP">
-          <exception class="org.openqa.selenium.SessionNotCreatedException">
+        <test-method signature="medicoPositiveFlow()[pri:0, instance:tests.teleConE2ETest@79079097]" started-at="2025-05-20T08:46:19 IST" name="medicoPositiveFlow" finished-at="2025-05-20T08:46:59 IST" duration-ms="40174" status="FAIL">
+          <exception class="org.openqa.selenium.InvalidArgumentException">
             <message>
-              <![CDATA[Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure. 
-Host info: host: 'LAPTOP-VM9OBF6R', ip: '192.168.1.7'
+              <![CDATA[The following required parameters are missing: ["strategy","selector"]
+Known required parameters are: ["strategy","selector"]
+Known optional parameters are: ["elementId","maxSwipes"]
+You have provided none
 Build info: version: '4.32.0', revision: 'd17c8aa950'
 System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '18.0.1'
 Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:noReset: false, appium:systemPort: 8100, appium:udid: emulator-5554, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:noReset: false, appium:systemPort: 8100, appium:udid: emulator-5554, platformName: ANDROID}]]>
+Command: [3f48647f-3437-497f-8e30-e0249f535fdc, executeScript {script=mobile: scroll, args=[{direction=down}]}]
+Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.manastik.dadt.MainActivity, appPackage: com.manastik.dadt, autoGrantPermissions: true, automationName: UIAutomator2, noReset: false, platformName: ANDROID, systemPort: 8201, udid: emulator-5554}, appium:deviceApiLevel: 31, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 440, appium:deviceScreenSize: 1080x2280, appium:deviceUDID: emulator-5554, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:noReset: false, appium:pixelRatio: 2.75, appium:platformVersion: 12, appium:statBarHeight: 83, appium:systemPort: 8201, appium:takesScreenshot: true, appium:udid: emulator-5554, appium:viewportRect: {height: 2197, left: 0, top: 83, width: 1080}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3f48647f-3437-497f-8e30-e0249f535fdc]]>
             </message>
             <full-stacktrace>
-              <![CDATA[org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure. 
-Host info: host: 'LAPTOP-VM9OBF6R', ip: '192.168.1.7'
+              <![CDATA[org.openqa.selenium.InvalidArgumentException: The following required parameters are missing: ["strategy","selector"]
+Known required parameters are: ["strategy","selector"]
+Known optional parameters are: ["elementId","maxSwipes"]
+You have provided none
 Build info: version: '4.32.0', revision: 'd17c8aa950'
 System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '18.0.1'
 Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:noReset: false, appium:systemPort: 8100, appium:udid: emulator-5554, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:noReset: false, appium:systemPort: 8100, appium:udid: emulator-5554, platformName: ANDROID}
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:563)
-at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:313)
-at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:174)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:101)
-at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:113)
-at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:109)
-at base.BaseTest.setupAndroidDriver(BaseTest.java:45)
-at base.BaseTest.setup(BaseTest.java:27)
+Command: [3f48647f-3437-497f-8e30-e0249f535fdc, executeScript {script=mobile: scroll, args=[{direction=down}]}]
+Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.manastik.dadt.MainActivity, appPackage: com.manastik.dadt, autoGrantPermissions: true, automationName: UIAutomator2, noReset: false, platformName: ANDROID, systemPort: 8201, udid: emulator-5554}, appium:deviceApiLevel: 31, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5554, appium:deviceScreenDensity: 440, appium:deviceScreenSize: 1080x2280, appium:deviceUDID: emulator-5554, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:noReset: false, appium:pixelRatio: 2.75, appium:platformVersion: 12, appium:statBarHeight: 83, appium:systemPort: 8201, appium:takesScreenshot: true, appium:udid: emulator-5554, appium:viewportRect: {height: 2197, left: 0, top: 83, width: 1080}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
+Session ID: 3f48647f-3437-497f-8e30-e0249f535fdc
+at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:67)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:243)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+at org.openqa.selenium.remote.RemoteWebDriver.executeScript(RemoteWebDriver.java:476)
+at utils.TestUtils.swipeAction(TestUtils.java:132)
+at tests.teleConE2ETest.medicoPositiveFlow(teleConE2ETest.java:74)
 at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 at java.base/java.lang.reflect.Method.invoke(Method.java:577)
 at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:390)
-at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:325)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:382)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:848)
+at org.testng.TestRunner.run(TestRunner.java:621)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
 at org.testng.SuiteRunner.run(SuiteRunner.java:336)
 at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
 at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
@@ -135,46 +74,16 @@ at org.testng.TestNG.run(TestNG.java:1082)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: java.io.UncheckedIOException: java.net.ConnectException
-at org.openqa.selenium.remote.http.jdk.JdkHttpClient.execute0(JdkHttpClient.java:500)
-at io.appium.java_client.internal.filters.AppiumIdempotencyFilter.lambda$apply$0(AppiumIdempotencyFilter.java:35)
-at io.appium.java_client.internal.filters.AppiumUserAgentFilter.lambda$apply$0(AppiumUserAgentFilter.java:87)
-at org.openqa.selenium.remote.http.Filter.lambda$andFinally$1(Filter.java:55)
-at org.openqa.selenium.remote.http.jdk.JdkHttpClient.lambda$executeAsync$2(JdkHttpClient.java:387)
-at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:833)
-Caused by: java.net.ConnectException
-at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:571)
-at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:123)
-at org.openqa.selenium.remote.http.jdk.JdkHttpClient.execute0(JdkHttpClient.java:459)
-... 9 more
-Caused by: java.net.ConnectException
-at java.net.http/jdk.internal.net.http.common.Utils.toConnectException(Utils.java:1045)
-at java.net.http/jdk.internal.net.http.PlainHttpConnection.connectAsync(PlainHttpConnection.java:198)
-at java.net.http/jdk.internal.net.http.PlainHttpConnection.checkRetryConnect(PlainHttpConnection.java:230)
-at java.net.http/jdk.internal.net.http.PlainHttpConnection.lambda$connectAsync$1(PlainHttpConnection.java:206)
-at java.base/java.util.concurrent.CompletableFuture.uniHandle(CompletableFuture.java:934)
-at java.base/java.util.concurrent.CompletableFuture$UniHandle.tryFire(CompletableFuture.java:911)
-at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:510)
-at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1773)
-... 3 more
-Caused by: java.nio.channels.ClosedChannelException
-at java.base/sun.nio.ch.SocketChannelImpl.ensureOpen(SocketChannelImpl.java:195)
-at java.base/sun.nio.ch.SocketChannelImpl.beginConnect(SocketChannelImpl.java:760)
-at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:848)
-at java.net.http/jdk.internal.net.http.PlainHttpConnection.lambda$connectAsync$0(PlainHttpConnection.java:183)
-at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
-at java.net.http/jdk.internal.net.http.PlainHttpConnection.connectAsync(PlainHttpConnection.java:185)
-... 9 more
 ]]>
             </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.SessionNotCreatedException -->
+          </exception> <!-- org.openqa.selenium.InvalidArgumentException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- medicoPositiveFlow -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.teleConE2ETest@79079097]" started-at="2025-05-20T08:46:59 IST" name="teardown" finished-at="2025-05-20T08:46:59 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
       </class> <!-- tests.teleConE2ETest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

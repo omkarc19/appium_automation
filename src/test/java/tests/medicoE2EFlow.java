@@ -41,7 +41,7 @@ public class medicoE2EFlow extends BaseTest {
 			nextBtn.click();
 		// Home page
 		
-		driver.findElement(AppiumBy.accessibilityId("16\n"+ "May")).click();
+		driver.findElement(AppiumBy.accessibilityId("20\n"+ "May")).click();
 		driver.findElement(AppiumBy.accessibilityId("Add an Offline Appointment")).click();
 
 		// Patient Information Page
