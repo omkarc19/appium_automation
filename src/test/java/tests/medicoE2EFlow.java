@@ -111,14 +111,10 @@ public class medicoE2EFlow extends BaseTest {
 		driver.findElement(AppiumBy.accessibilityId("Start")).click();		
 		Thread.sleep(1000);
 
-		utils.action_clickOnPosition(555, 2026);
+		utils.action_clickOnPosition(driver, 555, 2026);
 		Thread.sleep(1500);
-		utils.action_clickOnPosition(638, 590);
-		utils.action_clickOnPosition(104, 1406);
-		
-		utils.swipeToEnd("down", 0.70);
-		
-		utils.swipeTillTextVisible("How is the Community Affairs?", "down", 0.20, 5);
-//		driver.findElement(AppiumBy.accessibilityId("Next")).click();
+		utils.action_clickOnPosition(driver,638, 590);
+		utils.action_clickOnPosition(driver,104, 1406);
+
 	}
 }

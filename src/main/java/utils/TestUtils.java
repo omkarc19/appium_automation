@@ -9,6 +9,7 @@ import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 
 import io.appium.java_client.AppiumDriver;
@@ -25,103 +26,44 @@ import base.BaseTest;
 
 public class TestUtils extends BaseTest {
 
-	public static void action_clickOnPosition(int pointA_X, int pointA_Y) {
+	public static void action_clickOnPosition(AndroidDriver driver, int pointA_X, int pointA_Y) {
 		PointerInput finger = new PointerInput(org.openqa.selenium.interactions.PointerInput.Kind.TOUCH, "finger");
-		org.openqa.selenium.interactions.Sequence clickPosition = new org.openqa.selenium.interactions.Sequence(finger,1);
+		org.openqa.selenium.interactions.Sequence clickPosition = new org.openqa.selenium.interactions.Sequence(finger,
+				1);
 
 		clickPosition.addAction(finger.createPointerMove(Duration.ZERO, Origin.viewport(), pointA_X, pointA_Y))
 				.addAction(finger.createPointerDown(MouseButton.LEFT.asArg()))
 				.addAction(finger.createPointerUp(MouseButton.LEFT.asArg()));
 		driver.perform(Arrays.asList(clickPosition));
 	}
-	 public static void swipeToEnd(String direction, double swipePercentage) {
-	        Dimension size = driver.manage().window().getSize();
-	        int startX = 0, endX = 0, startY = 0, endY = 0;
 
-	        switch (direction.toLowerCase()) {
-	            case "up":
-	                startX = size.width / 2;
-	                startY = (int) (size.height * (1 - swipePercentage));
-	                endX = size.width / 2;
-	                endY = (int) (size.height * swipePercentage);
-	                break;
-	            case "down":
-	                startX = size.width / 2;
-	                startY = (int) (size.height * swipePercentage);
-	                endX = size.width / 2;
-	                endY = (int) (size.height * (1 - swipePercentage));
-	                break;
-	            case "left":
-	                startY = size.height / 2;
-	                startX = (int) (size.width * (1 - swipePercentage));
-	                endY = size.height / 2;
-	                endX = (int) (size.width * swipePercentage);
-	                break;
-	            case "right":
-	                startY = size.height / 2;
-	                startX = (int) (size.width * swipePercentage);
-	                endY = size.height / 2;
-	                endX = (int) (size.width * (1 - swipePercentage));
-	                break;
-	            default:
-	                throw new IllegalArgumentException("Invalid swipe direction: " + direction);
-	        }
+	public static void swipeUp(AndroidDriver driver) {
+		PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+		Sequence swipe = new Sequence(finger, 1);
+		int startX = driver.manage().window().getSize().width / 2;
+		int startY = (int) (driver.manage().window().getSize().height * 0.8);
+		int endY = (int) (driver.manage().window().getSize().height * 0.2);
+		swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY));
+		swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+		swipe.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), startX, endY));
+		swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+		driver.perform(Arrays.asList(swipe));
+	}
 
-	        performSwipe(startX, startY, endX, endY);
-	    }
+	public static void scrollToTextUntilEnd(AndroidDriver driver, String visibleText) {
+		while (true) {
+			try {
+				driver.findElement(By.xpath("//*[contains(@content-desc,'" + visibleText + "')]"));
+				return; // Found the element
+			} catch (NoSuchElementException e) {
+				String before = driver.getPageSource();
+				swipeUp(driver);
+				String after = driver.getPageSource();
+				if (before.equals(after)) {
+					throw new NoSuchElementException("Scolled till end. " +visibleText+ " Text not found");
+				}
+			}
+		}
+	}
 
-	    public static boolean swipeTillTextVisible(String text, String direction, double swipePercentage, int maxSwipes) throws InterruptedException {
-	        for (int i = 0; i < maxSwipes; i++) {
-	            if (isTextVisible(text)) {
-	                return true;
-	            }
-	            swipeToEnd(direction, swipePercentage);
-	            Thread.sleep(1000);
-	            try {
-	                Thread.sleep(500);
-	            } catch (InterruptedException e) {
-	                Thread.currentThread().interrupt();
-	            }
-	        }
-	        return false; // Text not visible after max swipes
-	    }
-
-	    private static void performSwipe(int startX, int startY, int endX, int endY) {
-	        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-	        Sequence swipe = new Sequence(finger, 0);
-	        swipe.addAction(finger.createPointerMove(Duration.ofMillis(0), Origin.viewport(), startX, startY))
-	                .addAction(finger.createPointerDown(MouseButton.LEFT.asArg()))
-	                .addAction(finger.createPointerMove(Duration.ofMillis(200), Origin.viewport(), endX, endY)) // Adjust duration as needed
-	                .addAction(finger.createPointerUp(MouseButton.LEFT.asArg()));
-	        driver.perform(Arrays.asList(swipe));
-	    }
-
-	    private static boolean isTextVisible(String text) {
-	        try {
-	            return driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")).isDisplayed();
-	        } catch (org.openqa.selenium.NoSuchElementException e) {
-	            return false; // Text not found on the current screen
-	        }
-	    }
-	
-	    public static boolean scrollToText(String text, int maxScrolls) throws InterruptedException {
-	        String uiScrollable = "new UiScrollable(new UiSelector().scrollable(true).instance(0))";
-	        String uiSelector = ".scrollTextIntoView(new UiSelector().textContains(\"" + text + "\").instance(0))";
-	        String command = uiScrollable + uiSelector;
-
-	        for (int i = 0; i < maxScrolls; i++) {
-	            try {
-	                // Execute the UiScrollable command
-	                driver.findElement(AppiumBy.androidUIAutomator(command));
-	                Thread.sleep(500); // Add a pause for Flutter
-	                if (driver.findElement(By.xpath("//*[contains(text(),'" + text + "')]")).isDisplayed()) {
-	                    return true;
-	                }
-	            } catch (Exception e) {
-	                // Keep scrolling
-	            }
-	        }
-	        return false;
-	    }
-	    
 }

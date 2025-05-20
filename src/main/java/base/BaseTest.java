@@ -136,6 +136,7 @@ public class BaseTest {
 			if (service != null && service.isRunning())
 				service.stop();
 				userService.stop();
+				System.out.println("Appium servers stopped successfully.");
 		} catch (Exception e) {
 			System.err.println("❌ Error while stopping Appium server: " + e.getMessage());
 		}
