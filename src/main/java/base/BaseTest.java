@@ -33,6 +33,8 @@ public class BaseTest {
 	@BeforeSuite
 	public void setup() throws MalformedURLException, InterruptedException {
 		if (platformName.equalsIgnoreCase("Android")) {
+			
+			setupUserDriver();
 			setupAndroidDriver();
 		} else if (platformName.equalsIgnoreCase("iOS")) {
 			setupIOSDriver();
@@ -42,7 +44,7 @@ public class BaseTest {
 	}
 	
 	public void startAppiumServer() {
-        service = new AppiumServiceBuilder().withAppiumJS(new File("C:\\Users\\Bhairu Chougale\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
+        service = new AppiumServiceBuilder().withAppiumJS(new File("C:\\Users\\Shivam\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
                 .withIPAddress("127.0.0.1").usingPort(4724).withArgument(GeneralServerFlag.LOG_LEVEL, "error").build();
         service.start();
         System.out.println("Appium server started successfully on - 127.0.0.1:4724");
@@ -50,7 +52,7 @@ public class BaseTest {
     }
 	
 	public void startUserAppiumServer() {
-		userService = new AppiumServiceBuilder().withAppiumJS(new File("C:\\Users\\Bhairu Chougale\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
+		userService = new AppiumServiceBuilder().withAppiumJS(new File("C:\\Users\\Shivam\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
                 .withIPAddress("127.0.0.1").usingPort(4725).withArgument(GeneralServerFlag.LOG_LEVEL, "error").build();
 		userService.start();
 		System.out.println("Appium server started successfully on - 127.0.0.1:4725");
