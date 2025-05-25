@@ -17,7 +17,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import utils.TestUtils;
 
-public class teleConE2ETest extends BaseTest {
+public class TeleConE2ETest extends BaseTest {
 
 	private TestUtils utils;
 	@Test
@@ -38,7 +38,7 @@ public class teleConE2ETest extends BaseTest {
 		userDriver.findElement(AppiumBy.accessibilityId("PROD")).click();
 		Thread.sleep(1000);
 		userDriver.findElement(By.xpath("//android.widget.EditText[@hint='Email\nEmail Id']")).click();
-		userAction.sendKeys("omkar2chougale@gmail.com").perform();		
+		userAction.sendKeys("omkar2chougale@gmail.com").perform();		 
 		userDriver.hideKeyboard();
 		
 		userDriver.findElement(By.xpath("//android.widget.EditText[@hint='Password\nPassword']")).click();
@@ -53,7 +53,7 @@ public class teleConE2ETest extends BaseTest {
 		userDriver.findElement(By.xpath("(//android.view.View[@content-desc=\"Book\"])[1]")).click();
 		Thread.sleep(1000);
 		userDriver.findElement(AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.Button\").instance(1)")).click();
-		userDriver.findElement(AppiumBy.accessibilityId("26, Monday, May 26, 2025")).click();
+		userDriver.findElement(AppiumBy.accessibilityId("27, Tuesday, May 27, 2025")).click();
 		userDriver.findElement(AppiumBy.accessibilityId("OK")).click();
 		userDriver.findElement(By.xpath("//android.view.View[@content-desc=\"Select the time slot\"]/following-sibling::android.view.View")).click();
 		
