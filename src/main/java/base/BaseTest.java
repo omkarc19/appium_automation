@@ -43,16 +43,38 @@ public class BaseTest {
 		}
 	}
 	
+	public static String getAppiumMainJsPath() {
+        String userHome = System.getProperty("user.home");
+        String os = System.getProperty("os.name").toLowerCase();
+        String appiumPath;
+
+        if (os.contains("win")) {
+        	appiumPath = userHome + "\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+        } else {
+        	appiumPath = "\\usr\\local\\lib\\node_modules\\appium\\build\\lib\\main.js";
+        }
+
+        File file = new File(appiumPath);
+        if (file.exists()) {
+            return file.getAbsolutePath();
+        } else {
+            throw new RuntimeException("Appium main.js not found at: " + appiumPath);
+        }
+    }
+	
 	public void startAppiumServer() {
-        service = new AppiumServiceBuilder().withAppiumJS(new File("C:\\Users\\Shivam\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
+		String appiumPath = getAppiumMainJsPath();
+        service = new AppiumServiceBuilder().withAppiumJS(new File(appiumPath))
                 .withIPAddress("127.0.0.1").usingPort(4724).withArgument(GeneralServerFlag.LOG_LEVEL, "error").build();
         service.start();
         System.out.println("Appium server started successfully on - 127.0.0.1:4724");
 //        .withLogFile(new File("NUL"))
     }
 	
+	
+	
 	public void startUserAppiumServer() {
-		userService = new AppiumServiceBuilder().withAppiumJS(new File("C:\\Users\\Shivam\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
+		userService = new AppiumServiceBuilder().withAppiumJS(new File("C:\\Users\\kunal\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
                 .withIPAddress("127.0.0.1").usingPort(4725).withArgument(GeneralServerFlag.LOG_LEVEL, "error").build();
 		userService.start();
 		System.out.println("Appium server started successfully on - 127.0.0.1:4725");
@@ -75,6 +97,7 @@ public class BaseTest {
 				driver = new AndroidDriver(new URL("http://127.0.0.1:4724"), options);
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 				action = new Actions(driver);
+				System.out.println("Medico driver initiated");
 				return; 
 			} catch (SessionNotCreatedException e) {
 				System.err.printf("Attempt %d failed: %s%n", attempt, e.getMessage());
@@ -103,7 +126,9 @@ public class BaseTest {
 				userDriver = new AndroidDriver(new URL("http://127.0.0.1:4725"), options1);
 				userDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 				userAction = new Actions(userDriver);
+				System.out.println("User driver initiated");
 				return; 
+				
 			} catch (SessionNotCreatedException e) {
 				System.err.printf("Attempt %d failed: %s%n", attempt, e.getMessage());
 				if (attempt == 3)

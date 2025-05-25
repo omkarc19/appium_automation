@@ -65,5 +65,12 @@ public class TestUtils extends BaseTest {
 			}
 		}
 	}
+	
+	public static void scrollToText(AndroidDriver driver, String text) {
+		driver.findElement(AppiumBy.androidUIAutomator(
+	            "new UiScrollable(new UiSelector().scrollable(true).instance(0))" +
+	            ".scrollIntoView(new UiSelector().textContains(\"" + text + "\"));"
+	        ));
+	}
 
 }

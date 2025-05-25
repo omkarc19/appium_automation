@@ -46,8 +46,8 @@ public class teleConE2ETest extends BaseTest {
 		userDriver.hideKeyboard();
 		userDriver.findElement(AppiumBy.accessibilityId("Sign In")).click();
 		
-		utils.swipeUp(userDriver);
-		utils.scrollToTextUntilEnd(userDriver, "Consult our top experts");
+		TestUtils.swipeUp(userDriver);
+		TestUtils.scrollToTextUntilEnd(userDriver, "Consult our top experts");
 		userDriver.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"View All\"]")).click();
 		
 		userDriver.findElement(By.xpath("(//android.view.View[@content-desc=\"Book\"])[1]")).click();
@@ -91,7 +91,7 @@ public class teleConE2ETest extends BaseTest {
 		
 		driver.findElement(By.xpath("//android.view.View[@content-desc=\"View All\"]")).click();
 		
-		utils.scrollToTextUntilEnd(driver, "Automation user");
+		TestUtils.scrollToTextUntilEnd(driver, "Automation user");
 		driver.findElement(By.xpath("//*[contains(@content-desc, 'Automation user')]")).click();
 		
 		driver.findElement(AppiumBy.accessibilityId("Start Appointment")).click();
