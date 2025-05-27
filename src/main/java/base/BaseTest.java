@@ -37,7 +37,7 @@ public class BaseTest {
 	public void setup() throws MalformedURLException, InterruptedException {
 		if (platformName.equalsIgnoreCase("Android")) {
 			setupUserDriver();
-			setupAndroidDriver();
+//			setupAndroidDriver();
 		} else if (platformName.equalsIgnoreCase("iOS")) {
 			setupIOSDriver();
 		} else {
@@ -50,7 +50,7 @@ public class BaseTest {
 		int appiumServerPort1 = Integer.parseInt(ConfigReader.getProperty("appium.server1.port"));
 
 		service = new AppiumServiceBuilder()
-				.withAppiumJS(new File("C:\\Users\\Shivam\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
+				.withAppiumJS(new File(getAppiumMainJsPath()))
 				.withIPAddress(appiumServerIp)
 				.usingPort(appiumServerPort1)
 				.withArgument(GeneralServerFlag.LOG_LEVEL, "error")
@@ -65,7 +65,7 @@ public class BaseTest {
 		int appiumServerPort2 = Integer.parseInt(ConfigReader.getProperty("appium.server2.port"));
 
 		userService = new AppiumServiceBuilder()
-				.withAppiumJS(new File("C:\\Users\\Shivam\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
+				.withAppiumJS(new File(getAppiumMainJsPath()))
 				.withIPAddress(appiumServerIp)
 				.usingPort(appiumServerPort2)
 				.withArgument(GeneralServerFlag.LOG_LEVEL, "error")
@@ -85,8 +85,13 @@ public class BaseTest {
 		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
 		int appiumServerPort1 = Integer.parseInt(ConfigReader.getProperty("appium.server1.port"));
 
-		UiAutomator2Options options = new UiAutomator2Options().setUdid(driver1Udid).setAppPackage(appPackage)
-				.setAppActivity(appActivity).setPlatformName("Android").setAutoGrantPermissions(true).setNoReset(false)
+		UiAutomator2Options options = new UiAutomator2Options()
+				.setUdid(driver1Udid)
+				.setAppPackage(appPackage)
+				.setAppActivity(appActivity)
+				.setPlatformName("Android")
+				.setAutoGrantPermissions(true)
+				.setNoReset(false)
 				.setSystemPort(driver1SystemPort);
 
 		for (int attempt = 1; attempt <= 3; attempt++) {
@@ -119,8 +124,13 @@ public class BaseTest {
 		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
 		int appiumServerPort2 = Integer.parseInt(ConfigReader.getProperty("appium.server2.port"));
 
-		UiAutomator2Options options1 = new UiAutomator2Options().setUdid(driver2Udid).setAppPackage(appPackage)
-				.setAppActivity(appActivity).setPlatformName("Android").setAutoGrantPermissions(true).setNoReset(false)
+		UiAutomator2Options options1 = new UiAutomator2Options()
+				.setUdid(driver2Udid)
+				.setAppPackage(appPackage)
+				.setAppActivity(appActivity)
+				.setPlatformName("Android")
+				.setAutoGrantPermissions(true)
+				.setNoReset(false)
 				.setSystemPort(driver2SystemPort);
 
 		for (int attempt = 1; attempt <= 3; attempt++) {
@@ -177,4 +187,20 @@ public class BaseTest {
 		return iosDriver;
 	}
 
+	public static String getAppiumMainJsPath() {
+        String userHome = System.getProperty("user.home");
+        String os = System.getProperty("os.name").toLowerCase();
+        String appiumPath;
+        if (os.contains("win")) {
+        	appiumPath = userHome + ConfigReader.getProperty("appium.js.path");
+        } else {
+        	appiumPath = "\\usr\\local\\lib\\node_modules\\appium\\build\\lib\\main.js";
+        }
+        File file = new File(appiumPath);
+        if (file.exists()) {
+            return file.getAbsolutePath();
+        } else {
+            throw new RuntimeException("Appium main.js not found at: " + appiumPath);
+        }
+    }
 }

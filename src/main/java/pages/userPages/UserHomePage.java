@@ -1,0 +1,18 @@
+package pages.userPages;
+
+import org.openqa.selenium.By;
+import base.BasePage;
+import io.appium.java_client.AppiumBy;
+import io.appium.java_client.android.AndroidDriver;
+
+public class UserHomePage extends BasePage {
+	private By viewAllBtn = AppiumBy.xpath("//android.view.View[@content-desc=\"View All\"]");
+
+	public UserHomePage(AndroidDriver driver) {
+		super(driver);
+	}
+
+	public void navigateToDrPage() throws InterruptedException {
+		click(viewAllBtn);
+	}
+}

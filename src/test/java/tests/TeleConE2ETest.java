@@ -15,6 +15,9 @@ import org.testng.annotations.Test;
 import base.BaseTest;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import pages.userPages.UserHomePage;
+import pages.userPages.UserLandingPage;
+import pages.userPages.UserLoginPage;
 import utils.TestUtils;
 
 public class TeleConE2ETest extends BaseTest {
@@ -24,36 +27,21 @@ public class TeleConE2ETest extends BaseTest {
 	public void medicoPositiveFlow() throws InterruptedException, MalformedURLException {
 
 		// User Phone
+		UserLandingPage userLandingPage = new UserLandingPage(userDriver);
+		UserLoginPage userLoginPage	= new UserLoginPage(userDriver);
+		UserHomePage userHomePage = new UserHomePage(userDriver);
 		
-		userDriver.findElement(By.xpath(".//*[@content-desc='Next']")).click();
-		Thread.sleep(1000);
-		userDriver.findElement(By.xpath(".//*[@content-desc='Next']")).click();
-		userDriver.findElement(AppiumBy.accessibilityId("Get Started")).click();
-
-		userDriver.findElement(By.xpath("//android.view.View[@content-desc=\"English\n" + "A\"]")).click();
-		userDriver.findElement(AppiumBy.accessibilityId("Next")).click();
-
-		userDriver.findElement(AppiumBy.accessibilityId("User")).click();
-		userDriver.findElement(AppiumBy.accessibilityId("TEST")).click();
-		userDriver.findElement(AppiumBy.accessibilityId("PROD")).click();
-		Thread.sleep(1000);
-		userDriver.findElement(By.xpath("//android.widget.EditText[@hint='Email\nEmail Id']")).click();
-		userAction.sendKeys("omkar2chougale@gmail.com").perform();		 
-		userDriver.hideKeyboard();
-		
-		userDriver.findElement(By.xpath("//android.widget.EditText[@hint='Password\nPassword']")).click();
-		userAction.sendKeys("Test@123").perform();
-		userDriver.hideKeyboard();
-		userDriver.findElement(AppiumBy.accessibilityId("Sign In")).click();
-		
+		userLandingPage.navigateLandingPage();
+		userLoginPage.login();
 		utils.swipeUp(userDriver);
 		utils.scrollToTextUntilEnd(userDriver, "Consult our top experts");
-		userDriver.findElement(AppiumBy.xpath("//android.view.View[@content-desc=\"View All\"]")).click();
+		userHomePage.navigateToDrPage();
+		
 		
 		userDriver.findElement(By.xpath("(//android.view.View[@content-desc=\"Book\"])[1]")).click();
 		Thread.sleep(1000);
 		userDriver.findElement(AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.Button\").instance(1)")).click();
-		userDriver.findElement(AppiumBy.accessibilityId("27, Tuesday, May 27, 2025")).click();
+		userDriver.findElement(AppiumBy.accessibilityId("28, Wednesday, May 28, 2025")).click();
 		userDriver.findElement(AppiumBy.accessibilityId("OK")).click();
 		userDriver.findElement(By.xpath("//android.view.View[@content-desc=\"Select the time slot\"]/following-sibling::android.view.View")).click();
 		
