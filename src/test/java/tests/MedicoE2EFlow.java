@@ -8,7 +8,7 @@ import base.BaseTest;
 import io.appium.java_client.AppiumBy;
 import utils.TestUtils;
 
-public class medicoE2EFlow extends BaseTest {
+public class MedicoE2EFlow extends BaseTest {
 
 	private TestUtils utils;
 	@Test
@@ -24,15 +24,11 @@ public class medicoE2EFlow extends BaseTest {
 
 		driver.findElement(AppiumBy.accessibilityId("Medico")).click();
 		driver.findElement(By.xpath("//android.view.View[@content-desc=\"Mobile Number\"]/following-sibling::android.widget.EditText")).click();
-		driver.setClipboardText("soubhik111das@gmail.com");
-		String email = driver.getClipboardText();
-		action.sendKeys(email).perform();
+		action.sendKeys("soubhik111das@gmail.com").perform();
 		
 		driver.hideKeyboard();
 		driver.findElement(By.xpath("//android.view.View[@content-desc=\"Version V2.16.6+209\"]/android.view.View/android.widget.EditText[2]")).click();
-		driver.setClipboardText("Test@456");
-		String pwd = driver.getClipboardText();		
-		action.sendKeys(pwd).perform();
+		action.sendKeys("Test@456").perform();
 		driver.hideKeyboard();
 		driver.findElement(AppiumBy.accessibilityId("Sign In")).click();
 
