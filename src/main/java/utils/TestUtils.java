@@ -21,11 +21,12 @@ import org.openqa.selenium.interactions.PointerInput.MouseButton;
 import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.RemoteWebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import base.BaseTest;
+import base.DriverManager;
 
-public class TestUtils extends BaseTest {
-
+public class TestUtils extends DriverManager {
+	
 	public static void action_clickOnPosition(AndroidDriver driver, int pointA_X, int pointA_Y) {
 		PointerInput finger = new PointerInput(org.openqa.selenium.interactions.PointerInput.Kind.TOUCH, "finger");
 		org.openqa.selenium.interactions.Sequence clickPosition = new org.openqa.selenium.interactions.Sequence(finger,

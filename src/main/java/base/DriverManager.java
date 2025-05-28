@@ -1,5 +1,6 @@
 package base;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
@@ -11,6 +12,7 @@ import utils.ConfigReader;
 
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -19,25 +21,24 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class BaseTest {
+public class DriverManager {
 
-	public static AndroidDriver driver;
+	public static AndroidDriver medicoDriver;
+	public static Actions medicoAction;
+	public AppiumDriverLocalService medicoService;
+
 	public static AndroidDriver userDriver;
-	public IOSDriver iosDriver;
-	
-	public static Actions action;
 	public static Actions userAction;
-	
-	public AppiumDriverLocalService service;
 	public AppiumDriverLocalService userService;
-	
-	public String platformName = System.getProperty("platformName", "Android"); // Default to Android
+
+	public IOSDriver iosDriver;
 
 	@BeforeSuite
 	public void setup() throws MalformedURLException, InterruptedException {
+		String platformName = ConfigReader.getProperty("platformName");
 		if (platformName.equalsIgnoreCase("Android")) {
 			setupUserDriver();
-//			setupAndroidDriver();
+			setupMedicoDriver();
 		} else if (platformName.equalsIgnoreCase("iOS")) {
 			setupIOSDriver();
 		} else {
@@ -45,37 +46,48 @@ public class BaseTest {
 		}
 	}
 
-	public void startAppiumServer() {
+	public static String getAppiumMainJsPath() {
+		String userHome = System.getProperty("user.home");
+		String os = System.getProperty("os.name").toLowerCase();
+		String appiumPath;
+		if (os.contains("win")) {
+			appiumPath = userHome + ConfigReader.getProperty("appium.js.path");
+		} else {
+			appiumPath = "\\usr\\local\\lib\\node_modules\\appium\\build\\lib\\main.js";
+		}
+		File file = new File(appiumPath);
+		if (file.exists()) {
+			return file.getAbsolutePath();
+		} else {
+			throw new RuntimeException("Appium main.js not found at: " + appiumPath);
+		}
+	}
+	
+	public void startMedicoAppiumServer() {
 		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
 		int appiumServerPort1 = Integer.parseInt(ConfigReader.getProperty("appium.server1.port"));
 
-		service = new AppiumServiceBuilder()
-				.withAppiumJS(new File(getAppiumMainJsPath()))
-				.withIPAddress(appiumServerIp)
-				.usingPort(appiumServerPort1)
-				.withArgument(GeneralServerFlag.LOG_LEVEL, "error")
-				.build();
-		service.start();
+		medicoService = new AppiumServiceBuilder().withAppiumJS(new File(getAppiumMainJsPath()))
+				.withIPAddress(appiumServerIp).usingPort(appiumServerPort1)
+				.withArgument(GeneralServerFlag.LOG_LEVEL, "error").build();
+		medicoService.start();
 		System.out.println("Appium server started successfully on - " + appiumServerIp + ":" + appiumServerPort1);
 	}
 
 	public void startUserAppiumServer() {
-		
+
 		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
 		int appiumServerPort2 = Integer.parseInt(ConfigReader.getProperty("appium.server2.port"));
 
-		userService = new AppiumServiceBuilder()
-				.withAppiumJS(new File(getAppiumMainJsPath()))
-				.withIPAddress(appiumServerIp)
-				.usingPort(appiumServerPort2)
-				.withArgument(GeneralServerFlag.LOG_LEVEL, "error")
-				.build();
+		userService = new AppiumServiceBuilder().withAppiumJS(new File(getAppiumMainJsPath()))
+				.withIPAddress(appiumServerIp).usingPort(appiumServerPort2)
+				.withArgument(GeneralServerFlag.LOG_LEVEL, "error").build();
 		userService.start();
 		System.out.println("Appium server started successfully on - " + appiumServerIp + ":" + appiumServerPort2);
 	}
 
-	public void setupAndroidDriver() throws MalformedURLException, InterruptedException {
-		startAppiumServer();
+	public void setupMedicoDriver() throws MalformedURLException, InterruptedException {
+		startMedicoAppiumServer();
 		Thread.sleep(3000);
 
 		String driver1Udid = ConfigReader.getProperty("android.driver1.udid");
@@ -85,7 +97,8 @@ public class BaseTest {
 		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
 		int appiumServerPort1 = Integer.parseInt(ConfigReader.getProperty("appium.server1.port"));
 
-		UiAutomator2Options options = new UiAutomator2Options()
+		UiAutomator2Options options = 
+				new UiAutomator2Options()
 				.setUdid(driver1Udid)
 				.setAppPackage(appPackage)
 				.setAppActivity(appActivity)
@@ -96,9 +109,10 @@ public class BaseTest {
 
 		for (int attempt = 1; attempt <= 3; attempt++) {
 			try {
-				driver = new AndroidDriver(new URL("http://" + appiumServerIp + ":" + appiumServerPort1), options);
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-				action = new Actions(driver);
+				medicoDriver = new AndroidDriver(new URL("http://" + appiumServerIp + ":" + appiumServerPort1),
+						options);
+				medicoDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+				medicoAction = new Actions(medicoDriver);
 				return;
 			} catch (SessionNotCreatedException e) {
 				System.err.printf("Attempt %d failed: %s%n", attempt, e.getMessage());
@@ -116,7 +130,6 @@ public class BaseTest {
 		startUserAppiumServer();
 		Thread.sleep(3000);
 
-		// Get properties for user driver 2
 		String driver2Udid = ConfigReader.getProperty("android.driver2.udid");
 		int driver2SystemPort = Integer.parseInt(ConfigReader.getProperty("android.driver2.systemPort"));
 		String appPackage = ConfigReader.getProperty("app.package");
@@ -124,7 +137,8 @@ public class BaseTest {
 		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
 		int appiumServerPort2 = Integer.parseInt(ConfigReader.getProperty("appium.server2.port"));
 
-		UiAutomator2Options options1 = new UiAutomator2Options()
+		UiAutomator2Options options1 = 
+				new UiAutomator2Options()
 				.setUdid(driver2Udid)
 				.setAppPackage(appPackage)
 				.setAppActivity(appActivity)
@@ -170,37 +184,31 @@ public class BaseTest {
 //            iosDriver.quit();
 //        }
 		try {
-			if (service != null && service.isRunning())
-				service.stop();
-			userService.stop();
-			System.out.println("Appium servers stopped successfully.");
+			if (medicoService != null && medicoService.isRunning()) {
+				medicoService.stop();
+				System.out.println("Medico Appium servers stopped successfully.");
+			}
+
+			if ((userService != null && userService.isRunning())) {
+				userService.stop();
+				System.out.println("User Appium servers stopped successfully.");
+			}
 		} catch (Exception e) {
-			System.err.println("❌ Error while stopping Appium server: " + e.getMessage());
+			System.err.println("❌ Error while stopping Appium servers: " + e.getMessage());
 		}
 	}
 
-	public AndroidDriver getAndroidDriver() {
-		return driver;
+	public AndroidDriver getMedicoDriver() {
+		return medicoDriver;
 	}
 
+	public AndroidDriver getUserDriver() {
+		return userDriver;
+	}
+	
 	public IOSDriver getIosDriver() {
 		return iosDriver;
 	}
 
-	public static String getAppiumMainJsPath() {
-        String userHome = System.getProperty("user.home");
-        String os = System.getProperty("os.name").toLowerCase();
-        String appiumPath;
-        if (os.contains("win")) {
-        	appiumPath = userHome + ConfigReader.getProperty("appium.js.path");
-        } else {
-        	appiumPath = "\\usr\\local\\lib\\node_modules\\appium\\build\\lib\\main.js";
-        }
-        File file = new File(appiumPath);
-        if (file.exists()) {
-            return file.getAbsolutePath();
-        } else {
-            throw new RuntimeException("Appium main.js not found at: " + appiumPath);
-        }
-    }
+	
 }

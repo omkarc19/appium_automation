@@ -1,5 +1,4 @@
-// base/BasePage.java
-package base; // Assuming your base package is 'base'
+package base; 
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
@@ -17,13 +16,11 @@ public class BasePage {
 	protected AppiumDriver driver; // This will hold the specific driver for this page object instance
 	protected WebDriverWait wait;
 
-	// Constructor: This is where the driver is "injected"
 	public BasePage(AppiumDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // Default wait time
 	}
 
-	// Common methods that any page object can use
 	protected WebElement waitForVisibility(By locator) {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}

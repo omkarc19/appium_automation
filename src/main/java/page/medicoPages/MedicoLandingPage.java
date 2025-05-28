@@ -1,19 +1,25 @@
-package pages.userPages;
+package page.medicoPages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import base.BasePage;
+import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 
-public class UserLandingPage extends BasePage {
+public class MedicoLandingPage extends BasePage {
+	
+	public MedicoLandingPage(AndroidDriver driver) {
+		super(driver);
+	}
+
 	private By nextBtn = By.xpath(".//*[@content-desc='Next']");
 	private By getStartedBtn = AppiumBy.accessibilityId("Get Started");
 	private By selectLanguageBtn = By.xpath("//android.view.View[@content-desc=\"English\n" + "A\"]");
 
-	public UserLandingPage(AndroidDriver driver) {
-		super(driver);
-	}
-	
 	public void navigateLandingPage() throws InterruptedException {
 		click(nextBtn);
 		Thread.sleep(1000);

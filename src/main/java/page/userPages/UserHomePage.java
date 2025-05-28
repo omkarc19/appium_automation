@@ -1,6 +1,7 @@
-package pages.userPages;
+package page.userPages;
 
 import org.openqa.selenium.By;
+
 import base.BasePage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -13,6 +14,7 @@ public class UserHomePage extends BasePage {
 	}
 
 	public void navigateToDrPage() throws InterruptedException {
+		
 		click(viewAllBtn);
 	}
 }
