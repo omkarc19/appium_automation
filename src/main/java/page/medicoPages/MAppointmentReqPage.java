@@ -1,4 +1,4 @@
-package page.userPages;
+package page.medicoPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,16 +10,16 @@ import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 
-public class UserChooseDrPage extends BasePage{
-	private By bookBtn =By.xpath("(//android.view.View[@content-desc=\"Book\"])[1]");
+public class MAppointmentReqPage extends BasePage {
 	
-	public UserChooseDrPage(AndroidDriver driver) {
+	public MAppointmentReqPage(AndroidDriver driver) {
 		super(driver);
 	}
-	
-	public void selectDr() throws InterruptedException {
-		click(bookBtn);
-		Thread.sleep(1000);
-	}
 
+	private By acceptBtn = AppiumBy.accessibilityId("Accept");
+	
+	public void acceptRequest() throws InterruptedException {
+		click(acceptBtn);
+		
+	}
 }

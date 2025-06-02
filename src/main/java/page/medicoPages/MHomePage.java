@@ -10,9 +10,9 @@ import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 
-public class MedicoHomePage extends BasePage {
+public class MHomePage extends BasePage {
 	
-	public MedicoHomePage(AndroidDriver driver) {
+	public MHomePage(AndroidDriver driver) {
 		super(driver);
 	}
 

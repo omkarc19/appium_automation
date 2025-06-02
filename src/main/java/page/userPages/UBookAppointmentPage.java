@@ -10,15 +10,15 @@ import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 
-public class UserBookAppointmentPage extends BasePage{
+public class UBookAppointmentPage extends BasePage{
 	private By calendarOption =AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.Button\").instance(1)");
-	private By dateOption =  AppiumBy.accessibilityId("28, Wednesday, May 28, 2025");
+	private By dateOption =  AppiumBy.accessibilityId("4, Wednesday, June 4, 2025");
 	private By okBtn =  AppiumBy.accessibilityId("OK");
 	private By timeSlot = By.xpath("//android.view.View[@content-desc=\"Select the time slot\"]/following-sibling::android.view.View");
 	private By bookBtn = AppiumBy.accessibilityId("Book");
 	private By closeBtn = By.xpath("//android.widget.Button");
 			
-	public UserBookAppointmentPage(AndroidDriver driver) {
+	public UBookAppointmentPage(AndroidDriver driver) {
 		super(driver);
 	}
 	

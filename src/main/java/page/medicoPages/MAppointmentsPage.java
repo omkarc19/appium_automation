@@ -10,16 +10,19 @@ import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 
-public class MedicoAppointmentReqPage extends BasePage {
+public class MAppointmentsPage extends BasePage {
 	
-	public MedicoAppointmentReqPage(AndroidDriver driver) {
+	public MAppointmentsPage(AndroidDriver driver) {
 		super(driver);
 	}
 
-	private By acceptBtn = AppiumBy.accessibilityId("Accept");
+	private By confirmedUserBtn = By.xpath("//*[contains(@content-desc, 'Vishnu Kumar')]");
+	private By startAppointmentBtn = AppiumBy.accessibilityId("Start Appointment");
 	
 	public void acceptRequest() throws InterruptedException {
-		click(acceptBtn);
+		click(confirmedUserBtn);
+		click(startAppointmentBtn);
+		Thread.sleep(3000);
 		
 	}
 }

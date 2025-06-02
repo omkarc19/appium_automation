@@ -7,16 +7,22 @@ import org.testng.annotations.Test;
 import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
-import page.medicoPages.MedicoAppointmentReqPage;
-import page.medicoPages.MedicoAppointmentsPage;
-import page.medicoPages.MedicoHomePage;
-import page.medicoPages.MedicoLandingPage;
-import page.medicoPages.MedicoLoginPage;
-import page.userPages.UserBookAppointmentPage;
-import page.userPages.UserChooseDrPage;
-import page.userPages.UserHomePage;
-import page.userPages.UserLandingPage;
-import page.userPages.UserLoginPage;
+import page.medicoPages.MAddCogniTestPage;
+import page.medicoPages.MAppointPeoplePage;
+import page.medicoPages.MAppointmentDetailsPage;
+import page.medicoPages.MAppointmentReqPage;
+import page.medicoPages.MAppointmentsPage;
+import page.medicoPages.MCommonPage;
+import page.medicoPages.MHomePage;
+import page.medicoPages.MLandingPage;
+import page.medicoPages.MLoginPage;
+import page.medicoPages.MTestPage;
+import page.userPages.UBookAppointmentPage;
+import page.userPages.UChooseDrPage;
+import page.userPages.UCommonPage;
+import page.userPages.UHomePage;
+import page.userPages.ULandingPage;
+import page.userPages.ULoginPage;
 import utils.TestUtils;
 
 public class TeleConE2ETest extends DriverManager { 
@@ -26,41 +32,60 @@ public class TeleConE2ETest extends DriverManager {
 	public void medicoPositiveFlow() throws InterruptedException, MalformedURLException {
 
 		// User Phone
-		UserLandingPage userLandingPage = new UserLandingPage(userDriver);
-		UserLoginPage userLoginPage	= new UserLoginPage(userDriver);
-		UserHomePage userHomePage = new UserHomePage(userDriver);
-		UserChooseDrPage userChooseDrPage = new UserChooseDrPage(userDriver);
-		UserBookAppointmentPage userBookAppointmentPage = new  UserBookAppointmentPage(userDriver);
+		ULandingPage uLandingPage = new ULandingPage(userDriver);
+		ULoginPage uLoginPage	= new ULoginPage(userDriver);
+		UHomePage uHomePage = new UHomePage(userDriver);
+		UChooseDrPage uChooseDrPage = new UChooseDrPage(userDriver);
+		UBookAppointmentPage uBookAppointmentPage = new  UBookAppointmentPage(userDriver);
+		UCommonPage uCommonPage = new UCommonPage(userDriver);
 		
 		//MedicoPages
-		MedicoLandingPage medicoLandingPage = new MedicoLandingPage(medicoDriver);
-		MedicoLoginPage medicoLoginPage	= new MedicoLoginPage(medicoDriver);
-		MedicoHomePage medicoHomePage = new MedicoHomePage(medicoDriver);
-		MedicoAppointmentReqPage medicoAppointmentReqPage = new MedicoAppointmentReqPage(medicoDriver);
-		MedicoAppointmentsPage medicoAppointmentsPage = new MedicoAppointmentsPage(medicoDriver);
+		MLandingPage mLandingPage = new MLandingPage(medicoDriver);
+		MLoginPage mLoginPage	= new MLoginPage(medicoDriver);
+		MHomePage mHomePage = new MHomePage(medicoDriver);
+		MAppointmentReqPage mAppointmentReqPage = new MAppointmentReqPage(medicoDriver);
+		MAppointmentsPage mAppointmentsPage = new MAppointmentsPage(medicoDriver);
+		MCommonPage mCommonPage = new MCommonPage(medicoDriver);
+		MAddCogniTestPage mAddCogniTestPage = new MAddCogniTestPage(medicoDriver);
+		MAppointmentDetailsPage mAppointmentDetailsPage = new MAppointmentDetailsPage(medicoDriver);
+		MAppointPeoplePage mAppointPeoplePage = new MAppointPeoplePage(medicoDriver);
+		MTestPage mTestPage = new MTestPage(medicoDriver);
 		
-		userLandingPage.navigateLandingPage();
-		userLoginPage.login();
+		uLandingPage.navigateLandingPage();
+		uLoginPage.login();
 		utils.swipeUp(userDriver);
 		utils.scrollToTextUntilEnd(userDriver, "Consult our top experts");
-		userHomePage.navigateToDrPage();
-		userChooseDrPage.selectDr();
-		userBookAppointmentPage.bookAppointment();
+		uHomePage.navigateToDrPage();
+		uChooseDrPage.selectDr();
+		uBookAppointmentPage.bookAppointment();
 				
 		// Medico phone
-		medicoLandingPage.navigateLandingPage();
-		medicoLoginPage.login();
-		medicoHomePage.viewPendingRequest();
-		medicoAppointmentReqPage.acceptRequest();
-		medicoHomePage.viewAllRequestBtn();
+		mLandingPage.navigateLandingPage();
+		mLoginPage.login();
+		mHomePage.viewPendingRequest();
+		mAppointmentReqPage.acceptRequest();
+		mHomePage.viewAllRequestBtn();
 		utils.scrollToTextUntilEnd(medicoDriver, "Vishnu Kumar");
-		medicoAppointmentsPage.acceptRequest();
+		mAppointmentsPage.acceptRequest();
 	
 		// User Phone
 		 ((AndroidDriver) userDriver).openNotifications();
-		 userDriver.findElement(By.id("com.manastik.dadt:id/llAccept")).click();
+		 uCommonPage.acceptMeeting();
 		 
 		// Medico Phone
-		 medicoDriver.findElement(AppiumBy.accessibilityId("Toggle Picture-in-Picture mode")).click();
+		 mCommonPage.minimizeMeeting();
+		 
+		 // User Phone
+		 uCommonPage.minimizeMeeting();
+		 
+		 //Medico Phone
+		 mAppointmentDetailsPage.addAppointmentDetails();
+		 mAddCogniTestPage.selectTest();
+		 mAppointPeoplePage.startTest();
+		 
+		 mTestPage.startTest();
+		 mTestPage.startAssesment();
+		 mTestPage.provideScore();
+		 
 	}
 }

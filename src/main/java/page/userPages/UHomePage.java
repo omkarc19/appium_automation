@@ -6,10 +6,10 @@ import base.BasePage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 
-public class UserHomePage extends BasePage {
+public class UHomePage extends BasePage {
 	private By viewAllBtn = AppiumBy.xpath("//android.view.View[@content-desc=\"View All\"]");
 
-	public UserHomePage(AndroidDriver driver) {
+	public UHomePage(AndroidDriver driver) {
 		super(driver);
 	}
 

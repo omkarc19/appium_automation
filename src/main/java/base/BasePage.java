@@ -33,6 +33,10 @@ public class BasePage {
 		waitForClickability(locator).click();
 	}
 
+	protected void clear(By locator) {
+		waitForClickability(locator).clear();
+	}
+	
 	protected void sendKeys(By locator, String text) {
 		waitForVisibility(locator).sendKeys(text);
 	}
