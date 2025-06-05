@@ -16,13 +16,14 @@ import page.medicoPages.MCommonPage;
 import page.medicoPages.MHomePage;
 import page.medicoPages.MLandingPage;
 import page.medicoPages.MLoginPage;
-import page.medicoPages.MTestPage;
+import page.medicoPages.MMocaTestPage;
 import page.userPages.UBookAppointmentPage;
 import page.userPages.UChooseDrPage;
 import page.userPages.UCommonPage;
 import page.userPages.UHomePage;
 import page.userPages.ULandingPage;
 import page.userPages.ULoginPage;
+import page.userPages.UTestPage;
 import utils.TestUtils;
 
 public class TeleConE2ETest extends DriverManager { 
@@ -38,6 +39,7 @@ public class TeleConE2ETest extends DriverManager {
 		UChooseDrPage uChooseDrPage = new UChooseDrPage(userDriver);
 		UBookAppointmentPage uBookAppointmentPage = new  UBookAppointmentPage(userDriver);
 		UCommonPage uCommonPage = new UCommonPage(userDriver);
+		UTestPage uTestPage = new UTestPage(userDriver);
 		
 		//MedicoPages
 		MLandingPage mLandingPage = new MLandingPage(medicoDriver);
@@ -49,7 +51,7 @@ public class TeleConE2ETest extends DriverManager {
 		MAddCogniTestPage mAddCogniTestPage = new MAddCogniTestPage(medicoDriver);
 		MAppointmentDetailsPage mAppointmentDetailsPage = new MAppointmentDetailsPage(medicoDriver);
 		MAppointPeoplePage mAppointPeoplePage = new MAppointPeoplePage(medicoDriver);
-		MTestPage mTestPage = new MTestPage(medicoDriver);
+		MMocaTestPage mMocaTestPage = new MMocaTestPage(medicoDriver);
 		
 		uLandingPage.navigateLandingPage();
 		uLoginPage.login();
@@ -83,9 +85,26 @@ public class TeleConE2ETest extends DriverManager {
 		 mAddCogniTestPage.selectTest();
 		 mAppointPeoplePage.startTest();
 		 
-		 mTestPage.startTest();
-		 mTestPage.startAssesment();
-		 mTestPage.provideScore();
+		 mMocaTestPage.startTest();
+		 mMocaTestPage.startAssesment();
+		 mMocaTestPage.provideScore();
+		 mMocaTestPage.goNext();
 		 
+		 
+		 // User Phone
+		 uTestPage.submitTest();
+		 
+		 //Medico Phone
+		 mMocaTestPage.provideScore();
+		 mMocaTestPage.goNext(); 
+		 
+		 mMocaTestPage.drawClockTest();    // Draw clock test page
+		 mMocaTestPage.startTest();			// Naming page
+		 mMocaTestPage.provideScore();
+		 mMocaTestPage.goNext();
+		 	
+		 mMocaTestPage.memoryTest();		// Memory page
+		 
+		 mMocaTestPage.attentionTest(); 	// Attention page
 	}
 }

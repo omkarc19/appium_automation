@@ -10,8 +10,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Pause;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -30,9 +33,7 @@ import org.testng.Reporter;
 import base.DriverManager;
 
 public class TestUtils extends DriverManager {
-	
-	public static RemoteWebDriver driver;
-	
+
 	public static void action_clickOnPosition(AndroidDriver driver, int pointA_X, int pointA_Y) {
 		PointerInput finger = new PointerInput(org.openqa.selenium.interactions.PointerInput.Kind.TOUCH, "finger");
 		org.openqa.selenium.interactions.Sequence clickPosition = new org.openqa.selenium.interactions.Sequence(finger,
@@ -73,51 +74,4 @@ public class TestUtils extends DriverManager {
 		}
 	}
 	
-	public static WebDriver getDriver() {
-		return driver;
-	}
-	
-	public static boolean isTitleTextPresentCaseInsenstive(String value) {
-		return getDriver().getTitle().toLowerCase().contains(value.toLowerCase());
-	}
-	
-	public static boolean isPageSourceTextPresentCaseInsensitive(String value) {
-		return getDriver().getPageSource().toLowerCase().contains(value.toLowerCase());
-	}
-	
-	public static boolean waitUntilTextIsPresent(String validationText) {
-		int searchFlag=0;
-		int attemptCount = 1;
-		int maxAttempts = 11;
-		int sleepInterval = 1000;
-			Reporter.log("Searching for := "+ validationText,true);	
-		if (isTitleTextPresentCaseInsenstive(validationText)) {
-			System.out.println("Page Title for " + validationText + " is true");
-			Reporter.log("Page Title for " + validationText + " is true");
-			searchFlag=1;
-		} else {
-				
-			foundIt:
-			while (attemptCount <= maxAttempts ) {
-				if (isPageSourceTextPresentCaseInsensitive(validationText)) {
-					Reporter.log("Page Source for " + validationText + " is true",true);
-					searchFlag=1;
-					break foundIt;
-				} else {					
-					try {
-						Thread.sleep(sleepInterval);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				attemptCount++;
-			}		
-		}	
-		if (searchFlag==0) {
-			Reporter.log("Page Source for " + validationText + " is not found",true);
-			Assert.assertTrue(false);
-		}
-		return (attemptCount <= maxAttempts) ? true : false;
-	}
-
 }

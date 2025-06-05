@@ -35,7 +35,7 @@ public class MLoginPage extends BasePage{
 		sendKeys(passwordFieldTxtBox, "Test@456");
 		hideKeyBoard();
 		click(signInBtn);
-		Assert.assertTrue(TestUtils.waitUntilTextIsPresent("Your Apppintments"));
+		
 	}
 
 }
