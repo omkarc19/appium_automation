@@ -33,6 +33,7 @@ public class TeleConE2ETest extends DriverManager {
 	public void medicoPositiveFlow() throws InterruptedException, MalformedURLException {
 
 		// User Phone
+		
 		ULandingPage uLandingPage = new ULandingPage(userDriver);
 		ULoginPage uLoginPage	= new ULoginPage(userDriver);
 		UHomePage uHomePage = new UHomePage(userDriver);
@@ -64,6 +65,8 @@ public class TeleConE2ETest extends DriverManager {
 		// Medico phone
 		mLandingPage.navigateLandingPage();
 		mLoginPage.login();
+		System.out.println(medicoDriver.findElement(AppiumBy.accessibilityId("Welcome Back")).getText()
+				);
 		mHomePage.viewPendingRequest();
 		mAppointmentReqPage.acceptRequest();
 		mHomePage.viewAllRequestBtn();

@@ -19,6 +19,7 @@ public class MLoginPage extends BasePage{
 	private By emailIdTxtBox = By.xpath("//android.widget.EditText[@hint='Email\nEmail Id']");
 	private By passwordFieldTxtBox = By.xpath("//android.widget.EditText[@hint='Password\nPassword']");
 	private By signInBtn = AppiumBy.accessibilityId("Sign In");
+	public By welcomeText = AppiumBy.accessibilityId("Welcome Back");
 
 	public MLoginPage(AndroidDriver driver) {
 		super(driver);
@@ -35,6 +36,8 @@ public class MLoginPage extends BasePage{
 		sendKeys(passwordFieldTxtBox, "Test@456");
 		hideKeyBoard();
 		click(signInBtn);
+
+		TestUtils.verifyText(driver, welcomeText, "Welcome Back", "Welcome Back Text");
 		
 	}
 

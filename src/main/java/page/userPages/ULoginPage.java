@@ -9,6 +9,7 @@ import base.BasePage;
 import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import utils.TestUtils;
 
 public class ULoginPage extends BasePage{
 	private By userOption = AppiumBy.accessibilityId("User");
@@ -17,12 +18,14 @@ public class ULoginPage extends BasePage{
 	private By emailIdTxtBox = By.xpath("//android.widget.EditText[@hint='Email\nEmail Id']");
 	private By passwordFieldTxtBox = By.xpath("//android.widget.EditText[@hint='Password\nPassword']");
 	private By signInBtn = AppiumBy.accessibilityId("Sign In");
+	private By welcomeText = AppiumBy.accessibilityId("Welcome Back");
 
 	public ULoginPage(AndroidDriver driver) {
 		super(driver);
 	}
 	
 	public void login() throws InterruptedException {
+		TestUtils.verifyText(driver, welcomeText, "Welcome Back", "Welcome Back Text");
 		click(userOption);
 		click(envDropDown);
 		click(prodEnvoption);

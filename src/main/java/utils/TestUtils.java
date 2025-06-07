@@ -74,4 +74,15 @@ public class TestUtils extends DriverManager {
 		}
 	}
 	
+	public static void verifyText(AppiumDriver driver, By locator, String expectedText, String elementName) {
+	    String actualText = driver.findElement(locator).getAttribute("content-desc");
+	    System.out.println(actualText);
+	    if (actualText.trim().equalsIgnoreCase(expectedText.trim())) {
+	        System.out.println("✅ '" + elementName + "' text matched: " + actualText);
+	    } else {
+	        System.err.println("❌ '" + elementName + "' text mismatch. Expected: '" + expectedText + "', but found: '" + actualText + "'");
+	        throw new AssertionError("Text assertion failed for '" + elementName + "'");
+	    }
+	}
+	
 }
