@@ -1,5 +1,8 @@
 package page.medicoPages;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,27 +14,41 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import utils.TestUtils;
 
-public class MMocaTestPage extends BasePage{
+public class MMocaTestPage extends BasePage {
+	
+	//Common Locators
 	private By startBtn = AppiumBy.accessibilityId("Start");
 	private By scoreTxtBox = By.xpath("//android.view.View[@content-desc=\"1\"]/preceding-sibling::android.widget.EditText");
 	private By nextArrowBtn = By.xpath("//android.view.View[@content-desc=\"1\"]/following-sibling::android.view.View");
-	
-//	public By nextArrowBtn1 = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.view.View\").instance(10)");
-	
-	//Draw Clock test
-	private By scoreTxtBox1 = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\").instance(0)");
-	private By scoreTxtBox2 = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\").instance(1)");
+
+	// Draw Clock test locators
+	private By scoreTxtBox1 = By.xpath("//android.view.View[@content-desc=\"Contour\"]/following-sibling::android.widget.EditText");
+	private By scoreTxtBox2 = By.xpath("//android.view.View[@content-desc=\"Numbers\"]/following-sibling::android.widget.EditText");
+	private By scoreTxtBox3 = By.xpath("//android.view.View[@content-desc=\"Hands\"]/following-sibling::android.widget.EditText");
 	private By nextArrowBtn2 = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.view.View\").instance(14)");
-	
-	// Attention Test
+
+
+	// Attention test locators
 	private By nextBtn = AppiumBy.accessibilityId("Next");
+	private By nextArrowBtn3 = By.xpath("//android.view.View[@content-desc=\"Score\"]/following-sibling::*[last()]");
+
+	//Language Test locators
+	private By fieldTxtBox = By.xpath("//android.view.View[@content-desc=\"F\"]/following-sibling::android.widget.EditText");
+	private By scoreTxtBox5 = By.xpath("//android.view.View[@content-desc=\"Score\"]/following-sibling::android.widget.EditText");
 	
+	//Abstraction test locators
+	private By trainTxtBox = By.xpath("//android.view.View[@content-desc=\"train – bicycle\"]/preceding-sibling::android.widget.EditText");
+	private By watchTxtBox = By.xpath("//android.view.View[@content-desc=\"train – bicycle\"]/following-sibling::android.widget.EditText");
+	private By scoreTxtBox4 = By.xpath("//android.view.View[@content-desc=\"Score\"]/following-sibling::android.widget.EditText");
+	private By nextArrowBtn4 = By.xpath("//android.view.View[@content-desc=\"2\"]/following-sibling::android.view.View");
 	
+	//Delayed Recall Test locators
+	private By nextArrowBtn5 = By.xpath("//android.view.View[@content-desc=\"Red\"]/following::android.view.View[last()]");
 	
 	public MMocaTestPage(AndroidDriver driver) {
 		super(driver);
 	}
-	
+
 	public void startTest() throws InterruptedException {
 		click(startBtn);
 	}
@@ -41,8 +58,7 @@ public class MMocaTestPage extends BasePage{
 		Thread.sleep(1000);
 		click(startBtn);
 	}
-	
-	
+
 	public void provideScore() throws InterruptedException {
 		Thread.sleep(1000);
 		click(scoreTxtBox);
@@ -52,46 +68,128 @@ public class MMocaTestPage extends BasePage{
 	public void goNext() {
 		click(nextArrowBtn);
 	}
-	
+
+	public void namingTest() throws InterruptedException {
+		System.out.println("In Naming Test");
+		click(startBtn);
+		provideScore();
+		goNext();
+		System.out.println("Completed Naming Test");
+	}
+
 	public void drawClockTest() throws InterruptedException {
-		sendKeys(scoreTxtBox, "1");
-		sendKeys(scoreTxtBox1, "1");
-		sendKeys(scoreTxtBox2, "1");
+		System.out.println("In Draw Clock Test");
+		click(scoreTxtBox1);
+		DriverManager.medicoAction.sendKeys("1").perform();
+		hideKeyBoard();
+		click(scoreTxtBox2);
+		DriverManager.medicoAction.sendKeys("1").perform();
+		hideKeyBoard();
+		click(scoreTxtBox3);
+		DriverManager.medicoAction.sendKeys("1").perform();
+		hideKeyBoard();
 		Thread.sleep(1000);
 		click(nextArrowBtn2);
+		System.out.println("Completed Draw Clock Test");
 	}
-	
-	public void memoryTest() {
-		TestUtils.action_clickOnPosition((AndroidDriver) driver, driver.manage().window().getSize().width / 2, (int) (driver.manage().window().getSize().height * 0.95));
+
+	public void memoryTest() throws InterruptedException {
+		System.out.println("In Memory Test");
+		Thread.sleep(1000);
+		TestUtils.action_clickOnPosition((AndroidDriver) driver, driver.manage().window().getSize().width / 2,
+				(int) (driver.manage().window().getSize().height * 0.9));
 		for (int i = 0; i < 10; i++) {
-			driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\").instance(" + i + ")")).click();
+			driver.findElement(AppiumBy
+					.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\").instance(" + i + ")"))
+					.click();
 			DriverManager.medicoAction.sendKeys("1").perform();
 		}
+		hideKeyBoard();
 		click(nextArrowBtn2);
+		System.out.println("Completed Memory Test");
 	}
-	
+
 	public void attentionTest() throws InterruptedException {
+		System.out.println("In Attention Test");
 		click(startBtn);
 		click(scoreTxtBox);
 		DriverManager.medicoAction.sendKeys("1").perform();
+		hideKeyBoard();
 		click(nextArrowBtn);
 		click(scoreTxtBox);
 		DriverManager.medicoAction.sendKeys("1").perform();
+		hideKeyBoard();
 		click(nextBtn);
 		click(scoreTxtBox);
 		DriverManager.medicoAction.sendKeys("1").perform();
+		hideKeyBoard();
 		click(nextArrowBtn);
-		
-		for (int i = 0; i < 6; i++) {
+
+		for (int i = 0; i < 5; i++) {
 			driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\").instance(" + i + ")")).click();
-			DriverManager.medicoAction.sendKeys("3").perform();
+			DriverManager.medicoAction.sendKeys("3").perform();			
 		}
-		
-//		
-//		click(scoreTxtBox);
-//		DriverManager.medicoAction.sendKeys("3").perform();
-		click(nextArrowBtn);
-		
-		
+		hideKeyBoard();
+		driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\").instance(5)")).click();
+		DriverManager.medicoAction.sendKeys("3").perform();	
+		hideKeyBoard();
+		click(nextArrowBtn3);
+		System.out.println("Completed Attention Test");
 	}
+
+	public void languageTest() throws InterruptedException {
+		System.out.println("In Language Test");
+		Thread.sleep(1000);
+		TestUtils.action_clickOnPosition((AndroidDriver) driver, driver.manage().window().getSize().width / 2,
+				(int) (driver.manage().window().getSize().height * 0.9));
+		provideScore();
+		goNext();
+		provideScore();
+		goNext();
+		click(fieldTxtBox);
+		DriverManager.medicoAction.sendKeys("12").perform();
+		click(scoreTxtBox5);
+		DriverManager.medicoAction.sendKeys("1").perform();
+		hideKeyBoard();
+		goNext();		
+		System.out.println("Completed Language Test");
+	}
+	
+	public void abstractionTest() throws InterruptedException {
+		System.out.println("In Abstraction Test");
+		Thread.sleep(1000);
+		TestUtils.action_clickOnPosition((AndroidDriver) driver, driver.manage().window().getSize().width / 2,
+				(int) (driver.manage().window().getSize().height * 0.9));
+		
+		click(trainTxtBox);
+		DriverManager.medicoAction.sendKeys("vehicle").perform();
+		hideKeyBoard();
+		click(watchTxtBox);
+		DriverManager.medicoAction.sendKeys("stationary").perform();
+		hideKeyBoard();
+		Thread.sleep(1000);
+		click(scoreTxtBox4);
+		DriverManager.medicoAction.sendKeys("2").perform();
+		hideKeyBoard();
+		click(nextArrowBtn4);
+		System.out.println("Completed Abstraction Test");
+	}
+	
+	public void delayedRecallTest() throws InterruptedException {
+		System.out.println("In Delayed Recall Test");
+		Thread.sleep(1000);
+		TestUtils.action_clickOnPosition((AndroidDriver) driver, driver.manage().window().getSize().width / 2,
+				(int) (driver.manage().window().getSize().height * 0.9));
+
+		List<WebElement> textboxes = driver.findElements(By.className("android.widget.EditText"));
+		for (WebElement textBox : textboxes) {
+			textBox.click();
+			textBox.sendKeys("1");
+		}
+		hideKeyBoard();
+		click(nextArrowBtn5);
+		System.out.println("Completed Delayed Recall Test");
+	}
+	
+	
 }

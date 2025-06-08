@@ -30,6 +30,23 @@ public class BasePage {
 	}
 
 	protected void click(By locator) {
+		WebElement elementToClick = waitForClickability(locator);
+        String elementInfo = "";
+        try {
+            String text = elementToClick.getText();
+            if (text != null && !text.isEmpty()) {
+                elementInfo = text;
+            } 
+            else if (driver instanceof AndroidDriver) {
+                String contentDesc = elementToClick.getAttribute("content-desc");
+                if (contentDesc != null && !contentDesc.isEmpty()) {
+                    elementInfo = contentDesc;
+                }
+            }
+            System.out.println("Clicked on - " + elementInfo);
+        } catch (Exception e) {
+            System.out.println("Could not retrieve text or content-desc for element: " + locator + " - " + e.getMessage());
+        }
 		waitForClickability(locator).click();
 	}
 
@@ -37,10 +54,12 @@ public class BasePage {
 		waitForClickability(locator).clear();
 	}
 	
-	protected void sendKeys(By locator, String text) {
+	protected void sendKeys(By locator, String text) throws InterruptedException {
 		waitForVisibility(locator).sendKeys(text);
+		System.out.println("Typed - " + text);
+		hideKeyBoard();
 	}
-
+	
 	protected String getText(By locator) {
 		return waitForVisibility(locator).getText();
 	}
@@ -53,19 +72,19 @@ public class BasePage {
 		}
 	}
 
-	protected void hideKeyBoard() {
+	protected void hideKeyBoard() throws InterruptedException {
+		System.out.println("Hiding keyboard");
+		Thread.sleep(1000);
 		((AndroidDriver) driver).hideKeyboard();
+		System.out.println("Keyboard hidden");
 	}
 
-	/**
-	 * Scrolls the screen until the specified text is visible. This method is
-	 * primarily designed for Android using UiAutomator2's UiScrollable.
-	 *
-	 * @param text       The text string to scroll to.
-	 * @param maxScrolls The maximum number of scroll attempts before giving up.
-	 * @return true if the text is found and visible, false otherwise.
-	 * @throws RuntimeException if the driver is not an AndroidDriver.
-	 */
+
+//	 * Scrolls the screen until the specified text is visible. 
+//	 * @param text       The text string to scroll to.
+//	 * @param maxScrolls The maximum number of scroll attempts before giving up.
+//	 * @return true if the text is found and visible, false otherwise.
+
 	public boolean scrollToText(String text, int maxScrolls) {
 		if (!(driver instanceof AndroidDriver)) {
 			throw new RuntimeException("scrollToText method is currently only supported for AndroidDriver.");

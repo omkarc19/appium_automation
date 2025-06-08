@@ -31,10 +31,8 @@ public class MLoginPage extends BasePage{
 		click(prodEnvoption);
 		click(emailIdTxtBox);
 		sendKeys(emailIdTxtBox, "soubhik111das@gmail.com");
-		hideKeyBoard();
 		click(passwordFieldTxtBox);
 		sendKeys(passwordFieldTxtBox, "Test@456");
-		hideKeyBoard();
 		click(signInBtn);
 
 		TestUtils.verifyText(driver, welcomeText, "Welcome Back", "Welcome Back Text");

@@ -58,6 +58,17 @@ public class TestUtils extends DriverManager {
 		driver.perform(Arrays.asList(swipe));
 	}
 
+	public static void dragAndDrop(AppiumDriver driver, int sourceX, int sourceY, int targetX, int targetY) {
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence dragAndDropSequence = new Sequence(finger, 1);
+        dragAndDropSequence.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), sourceX, sourceY));
+        dragAndDropSequence.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        dragAndDropSequence.addAction(finger.createPointerMove(Duration.ofMillis(200), PointerInput.Origin.viewport(), sourceX, sourceY)); // Small pause
+        dragAndDropSequence.addAction(finger.createPointerMove(Duration.ofMillis(800), PointerInput.Origin.viewport(), targetX, targetY));
+        dragAndDropSequence.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        driver.perform(Arrays.asList(dragAndDropSequence));
+    }
+	
 	public static void scrollToTextUntilEnd(AndroidDriver driver, String visibleText) {
 		while (true) {
 			try {
@@ -76,7 +87,6 @@ public class TestUtils extends DriverManager {
 	
 	public static void verifyText(AppiumDriver driver, By locator, String expectedText, String elementName) {
 	    String actualText = driver.findElement(locator).getAttribute("content-desc");
-	    System.out.println(actualText);
 	    if (actualText.trim().equalsIgnoreCase(expectedText.trim())) {
 	        System.out.println("✅ '" + elementName + "' text matched: " + actualText);
 	    } else {

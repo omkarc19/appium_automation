@@ -9,6 +9,7 @@ import base.BasePage;
 import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import utils.TestUtils;
 
 public class UCommonPage extends BasePage{
 	private By acceptBtn = By.id("com.manastik.dadt:id/llAccept");
@@ -25,5 +26,7 @@ public class UCommonPage extends BasePage{
 	public void minimizeMeeting() throws InterruptedException {
 		Thread.sleep(1500);
 		click(toggleBtn);
+		Thread.sleep(1500);
+		TestUtils.dragAndDrop(driver, 800, 1900, 1076, 600);
 	}
 }

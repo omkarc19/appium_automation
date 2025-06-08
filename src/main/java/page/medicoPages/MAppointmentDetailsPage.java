@@ -41,7 +41,7 @@ public class MAppointmentDetailsPage extends BasePage{
 		click(medicalHistoryTxtBox);
 		sendKeys(medicalHistoryTxtBox, "Text by automation script");
 
-		
+//		Uncomment following lines to upload test report - unstable feature as camera is already on in this flow
 //		click(testReportBtn);
 //		click(cameraBtn);
 //		click(shutterBtn);
