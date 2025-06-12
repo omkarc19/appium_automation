@@ -27,8 +27,8 @@ public class MLoginPage extends BasePage{
 	
 	public void login() throws InterruptedException {
 		click(medicoOption);
-		click(envDropDown);
-		click(prodEnvoption);
+//		click(envDropDown);
+//		click(prodEnvoption);
 		click(emailIdTxtBox);
 		sendKeys(emailIdTxtBox, "soubhik111das@gmail.com");
 		click(passwordFieldTxtBox);

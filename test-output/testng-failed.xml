@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.TeleConE2ETest">
+      <class name="tests.MocaTest">
         <methods>
           <include name="medicoPositiveFlow"/>
           <include name="teardown"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- tests.TeleConE2ETest -->
+      </class> <!-- tests.MocaTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

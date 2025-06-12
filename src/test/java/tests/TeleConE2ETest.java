@@ -28,7 +28,7 @@ import utils.TestUtils;
 public class TeleConE2ETest extends DriverManager {
 
 	private TestUtils utils;
-//	Vishnu Kumar patient id - f005d35a-9c9d-4bd3-94c6-cb589295d8c7  , change appointment status to - APPOINTMENT_COMPLETED
+//	Vishnu Kumar patientId = "f005d35a-9c9d-4bd3-94c6-cb589295d8c7"  , change appointment status to - APPOINTMENT_COMPLETED
 
 	@Test
 	public void medicoPositiveFlow() throws InterruptedException, MalformedURLException {
@@ -104,5 +104,7 @@ public class TeleConE2ETest extends DriverManager {
 		mMocaTestPage.languageTest();       //Language Page
 		mMocaTestPage.abstractionTest();    // Abstraction Page
 		mMocaTestPage.delayedRecallTest();  // Delayed Recall page
+		mMocaTestPage.orientationTest();	// Orientation page
+		
 	}
 }

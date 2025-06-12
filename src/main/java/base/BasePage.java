@@ -75,8 +75,13 @@ public class BasePage {
 	protected void hideKeyBoard() throws InterruptedException {
 		System.out.println("Hiding keyboard");
 		Thread.sleep(1000);
-		((AndroidDriver) driver).hideKeyboard();
-		System.out.println("Keyboard hidden");
+		try {
+			((AndroidDriver) driver).hideKeyboard();
+			System.out.println("Keyboard hidden");
+		} catch (Exception e) {
+			System.out.println("Got error while hiding keyboard");
+		}
+		
 	}
 
 

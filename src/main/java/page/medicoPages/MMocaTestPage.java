@@ -43,7 +43,12 @@ public class MMocaTestPage extends BasePage {
 	private By nextArrowBtn4 = By.xpath("//android.view.View[@content-desc=\"2\"]/following-sibling::android.view.View");
 	
 	//Delayed Recall Test locators
-	private By nextArrowBtn5 = By.xpath("//android.view.View[@content-desc=\"Red\"]/following::android.view.View[last()]");
+	private By nextArrowBtn5 = By.xpath("//android.view.View[@content-desc=\"Red\"]/following-sibling::android.view.View");
+	
+	// Orientation Test Locators
+	private By scoreTxtBox6 = By.xpath("//android.widget.EditText");
+	private By nextArrowBtn6 = By.xpath("//android.view.View[@content-desc=\"What is the\"]/following-sibling::android.view.View[2]");
+	
 	
 	public MMocaTestPage(AndroidDriver driver) {
 		super(driver);
@@ -189,6 +194,47 @@ public class MMocaTestPage extends BasePage {
 		hideKeyBoard();
 		click(nextArrowBtn5);
 		System.out.println("Completed Delayed Recall Test");
+	}
+	
+	public void orientationTest() throws InterruptedException {
+		System.out.println("In Orientation Test");
+		Thread.sleep(1000);
+		TestUtils.action_clickOnPosition((AndroidDriver) driver, driver.manage().window().getSize().width / 2,
+				(int) (driver.manage().window().getSize().height * 0.9));
+
+		click(scoreTxtBox6);
+		sendKeys(scoreTxtBox6, "1");
+		hideKeyBoard();
+		click(nextArrowBtn6);
+		
+		click(scoreTxtBox6);
+		sendKeys(scoreTxtBox6, "1");
+		hideKeyBoard();
+		click(nextArrowBtn6);
+		
+		click(scoreTxtBox6);
+		sendKeys(scoreTxtBox6, "1");
+		hideKeyBoard();
+		click(nextArrowBtn6);
+		
+		click(scoreTxtBox6);
+		sendKeys(scoreTxtBox6, "1");
+		hideKeyBoard();
+		click(nextArrowBtn6);
+		
+		click(scoreTxtBox6);
+		sendKeys(scoreTxtBox6, "1");
+		hideKeyBoard();
+		click(nextArrowBtn6);
+		
+		click(scoreTxtBox6);
+		sendKeys(scoreTxtBox6, "1");
+		click(scoreTxtBox5);
+		sendKeys(scoreTxtBox5, "6");
+		hideKeyBoard();
+		
+		click(nextArrowBtn3);
+		System.out.println("Completed Orientation Test");
 	}
 	
 	

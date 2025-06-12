@@ -67,6 +67,7 @@ public class TestUtils extends DriverManager {
         dragAndDropSequence.addAction(finger.createPointerMove(Duration.ofMillis(800), PointerInput.Origin.viewport(), targetX, targetY));
         dragAndDropSequence.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
         driver.perform(Arrays.asList(dragAndDropSequence));
+        System.out.println("Draged item from " + sourceX + " , " + sourceY + " to " + targetX + " , " + targetY);
     }
 	
 	public static void scrollToTextUntilEnd(AndroidDriver driver, String visibleText) {
