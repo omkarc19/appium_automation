@@ -10,7 +10,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Pause;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -20,11 +24,15 @@ import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.PointerInput.MouseButton;
 import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.Reporter;
 
-import base.BaseTest;
+import base.DriverManager;
 
-public class TestUtils extends BaseTest {
+public class TestUtils extends DriverManager {
 
 	public static void action_clickOnPosition(AndroidDriver driver, int pointA_X, int pointA_Y) {
 		PointerInput finger = new PointerInput(org.openqa.selenium.interactions.PointerInput.Kind.TOUCH, "finger");
@@ -50,6 +58,18 @@ public class TestUtils extends BaseTest {
 		driver.perform(Arrays.asList(swipe));
 	}
 
+	public static void dragAndDrop(AppiumDriver driver, int sourceX, int sourceY, int targetX, int targetY) {
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence dragAndDropSequence = new Sequence(finger, 1);
+        dragAndDropSequence.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), sourceX, sourceY));
+        dragAndDropSequence.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        dragAndDropSequence.addAction(finger.createPointerMove(Duration.ofMillis(200), PointerInput.Origin.viewport(), sourceX, sourceY)); // Small pause
+        dragAndDropSequence.addAction(finger.createPointerMove(Duration.ofMillis(800), PointerInput.Origin.viewport(), targetX, targetY));
+        dragAndDropSequence.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        driver.perform(Arrays.asList(dragAndDropSequence));
+        System.out.println("Draged item from " + sourceX + " , " + sourceY + " to " + targetX + " , " + targetY);
+    }
+	
 	public static void scrollToTextUntilEnd(AndroidDriver driver, String visibleText) {
 		while (true) {
 			try {
@@ -65,5 +85,15 @@ public class TestUtils extends BaseTest {
 			}
 		}
 	}
-
+	
+	public static void verifyText(AppiumDriver driver, By locator, String expectedText, String elementName) {
+	    String actualText = driver.findElement(locator).getAttribute("content-desc");
+	    if (actualText.trim().equalsIgnoreCase(expectedText.trim())) {
+	        System.out.println("✅ '" + elementName + "' text matched: " + actualText);
+	    } else {
+	        System.err.println("❌ '" + elementName + "' text mismatch. Expected: '" + expectedText + "', but found: '" + actualText + "'");
+	        throw new AssertionError("Text assertion failed for '" + elementName + "'");
+	    }
+	}
+	
 }

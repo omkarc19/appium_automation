@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-05-24T20:24:30 PDT" name="Default suite" finished-at="2025-05-24T20:26:01 PDT" duration-ms="90764">
+  <suite started-at="2025-06-13T13:42:10 IST" name="Default suite" finished-at="2025-06-13T13:48:13 IST" duration-ms="363908">
     <groups>
     </groups>
-    <test started-at="2025-05-24T20:24:30 PDT" name="Default test" finished-at="2025-05-24T20:26:01 PDT" duration-ms="90764">
-      <class name="tests.teleConE2ETest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:tests.teleConE2ETest@6b2ea799]" started-at="2025-05-24T20:24:00 PDT" name="setup" finished-at="2025-05-24T20:24:30 PDT" duration-ms="30560" status="PASS">
+    <test started-at="2025-06-13T13:42:10 IST" name="Default test" finished-at="2025-06-13T13:48:13 IST" duration-ms="363908">
+      <class name="tests.TeleConE2ETest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.TeleConE2ETest@2b71e916]" started-at="2025-06-13T13:41:42 IST" name="setup" finished-at="2025-06-13T13:42:10 IST" duration-ms="27694" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="medicoPositiveFlow()[pri:0, instance:tests.teleConE2ETest@6b2ea799]" started-at="2025-05-24T20:24:30 PDT" name="medicoPositiveFlow" finished-at="2025-05-24T20:26:01 PDT" duration-ms="90741" status="PASS">
+        <test-method signature="medicoPositiveFlow()[pri:0, instance:tests.TeleConE2ETest@2b71e916]" started-at="2025-06-13T13:42:10 IST" name="medicoPositiveFlow" finished-at="2025-06-13T13:48:13 IST" duration-ms="363885" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- medicoPositiveFlow -->
-        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.teleConE2ETest@6b2ea799]" started-at="2025-05-24T20:26:01 PDT" name="teardown" finished-at="2025-05-24T20:26:01 PDT" duration-ms="34" status="PASS">
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.TeleConE2ETest@2b71e916]" started-at="2025-06-13T13:48:14 IST" name="teardown" finished-at="2025-06-13T13:48:14 IST" duration-ms="37" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->
-      </class> <!-- tests.teleConE2ETest -->
+      </class> <!-- tests.TeleConE2ETest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
