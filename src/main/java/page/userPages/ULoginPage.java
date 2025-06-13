@@ -26,9 +26,9 @@ public class ULoginPage extends BasePage{
 	
 	public void login() throws InterruptedException {
 		TestUtils.verifyText(driver, welcomeText, "Welcome Back", "Welcome Back Text");
-		click(userOption);
-		click(envDropDown);
-		click(prodEnvoption);
+//		click(userOption);
+//		click(envDropDown);
+//		click(prodEnvoption);
 		click(emailIdTxtBox);
 		sendKeys(emailIdTxtBox, "vishnu.kumar@manastik.com");
 		hideKeyBoard();

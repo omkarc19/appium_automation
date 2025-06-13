@@ -7,6 +7,7 @@ import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import page.medicoPages.MAddCogniTestPage;
+import page.medicoPages.MAddPrescriptionPage;
 import page.medicoPages.MAppointPeoplePage;
 import page.medicoPages.MAppointmentDetailsPage;
 import page.medicoPages.MAppointmentReqPage;
@@ -16,6 +17,11 @@ import page.medicoPages.MHomePage;
 import page.medicoPages.MLandingPage;
 import page.medicoPages.MLoginPage;
 import page.medicoPages.MMocaTestPage;
+import page.medicoPages.MPatientRehabPage;
+import page.medicoPages.MPatientTestPage;
+import page.medicoPages.MReferDrPage;
+import page.medicoPages.MScorePage;
+import page.medicoPages.MSummaryPage;
 import page.userPages.UBookAppointmentPage;
 import page.userPages.UChooseDrPage;
 import page.userPages.UCommonPage;
@@ -53,7 +59,13 @@ public class TeleConE2ETest extends DriverManager {
 		MAppointmentDetailsPage mAppointmentDetailsPage = new MAppointmentDetailsPage(medicoDriver);
 		MAppointPeoplePage mAppointPeoplePage = new MAppointPeoplePage(medicoDriver);
 		MMocaTestPage mMocaTestPage = new MMocaTestPage(medicoDriver);
-
+		MScorePage mScorePage = new MScorePage(medicoDriver);
+		MPatientTestPage  mPatientTestPage = new MPatientTestPage(medicoDriver);
+		MReferDrPage mReferDrPage = new MReferDrPage(medicoDriver);
+		MAddPrescriptionPage mAddPrescriptionPage = new MAddPrescriptionPage(medicoDriver);
+		MPatientRehabPage mPatientRehabPage = new MPatientRehabPage(medicoDriver);
+		MSummaryPage mSummaryPage = new MSummaryPage(medicoDriver); 
+		
 		// User Phone
 		uLandingPage.navigateLandingPage();
 		uLoginPage.login();
@@ -96,15 +108,24 @@ public class TeleConE2ETest extends DriverManager {
 		// Medico Phone
 		mMocaTestPage.provideScore();
 		mMocaTestPage.goNext();
-
 		mMocaTestPage.drawClockTest(); 		// Draw clock test page
 		mMocaTestPage.namingTest(); 		// Naming page
 		mMocaTestPage.memoryTest(); 		// Memory page
+		utils.swipeUp(userDriver);
 		mMocaTestPage.attentionTest(); 		// Attention page
 		mMocaTestPage.languageTest();       //Language Page
+		utils.swipeUp(userDriver);
 		mMocaTestPage.abstractionTest();    // Abstraction Page
 		mMocaTestPage.delayedRecallTest();  // Delayed Recall page
+		utils.swipeUp(userDriver);
 		mMocaTestPage.orientationTest();	// Orientation page
+		
+		mScorePage.goNext();
+		mPatientTestPage.goNext();
+		mReferDrPage.clickSkipBtn();
+		mAddPrescriptionPage.clickSkipBtn();
+		mPatientRehabPage.clickNextBtn();
+		mSummaryPage.clickFinishAppointmentBtn();
 		
 	}
 }

@@ -96,7 +96,8 @@ public class DriverManager {
 		String appActivity = ConfigReader.getProperty("app.activity");
 		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
 		int appiumServerPort1 = Integer.parseInt(ConfigReader.getProperty("appium.server1.port"));
-
+		boolean setNoReset1 = Boolean.parseBoolean(ConfigReader.getProperty("setNoReset1"));
+		
 		UiAutomator2Options options = 
 				new UiAutomator2Options()
 				.setUdid(driver1Udid)
@@ -104,7 +105,7 @@ public class DriverManager {
 				.setAppActivity(appActivity)
 				.setPlatformName("Android")
 				.setAutoGrantPermissions(true)
-				.setNoReset(false)
+				.setNoReset(setNoReset1)
 				.setSystemPort(driver1SystemPort);
 
 		for (int attempt = 1; attempt <= 3; attempt++) {
@@ -136,7 +137,8 @@ public class DriverManager {
 		String appActivity = ConfigReader.getProperty("app.activity");
 		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
 		int appiumServerPort2 = Integer.parseInt(ConfigReader.getProperty("appium.server2.port"));
-
+		boolean setNoReset2 = Boolean.parseBoolean(ConfigReader.getProperty("setNoReset2"));
+		
 		UiAutomator2Options options1 = 
 				new UiAutomator2Options()
 				.setUdid(driver2Udid)
@@ -144,7 +146,7 @@ public class DriverManager {
 				.setAppActivity(appActivity)
 				.setPlatformName("Android")
 				.setAutoGrantPermissions(true)
-				.setNoReset(false)
+				.setNoReset(setNoReset2)
 				.setSystemPort(driver2SystemPort);
 
 		for (int attempt = 1; attempt <= 3; attempt++) {

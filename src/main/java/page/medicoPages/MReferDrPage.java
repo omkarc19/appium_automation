@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import base.BasePage;
 import base.DriverManager;
@@ -11,19 +12,16 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import utils.TestUtils;
 
-public class MCommonPage extends BasePage{
-	private By toggleBtn = AppiumBy.accessibilityId("Toggle Picture-in-Picture mode");
+public class MReferDrPage extends BasePage{
+	private By skipBtn = AppiumBy.accessibilityId("Skip");
 
-	public MCommonPage(AndroidDriver driver) {
+
+	public MReferDrPage(AndroidDriver driver) {
 		super(driver);
 	}
 	
-	public void minimizeMeeting() throws InterruptedException {
-		Thread.sleep(1500);
-		click(toggleBtn);
-		Thread.sleep(1500);
-		TestUtils.dragAndDrop(driver, 800, 1590, 1076, 600);
+	public void clickSkipBtn() throws InterruptedException {
+		click(skipBtn);
 	}
 
-	
 }

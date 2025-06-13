@@ -27,6 +27,6 @@ public class UCommonPage extends BasePage{
 		Thread.sleep(1500);
 		click(toggleBtn);
 		Thread.sleep(1500);
-		TestUtils.dragAndDrop(driver, 800, 1900, 1076, 600);
+		TestUtils.dragAndDrop(driver, 800, 1590, 1076, 600);
 	}
 }
