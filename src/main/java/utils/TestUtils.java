@@ -29,6 +29,7 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
+import org.testng.asserts.SoftAssert;
 
 import base.DriverManager;
 
@@ -86,14 +87,29 @@ public class TestUtils extends DriverManager {
 		}
 	}
 	
-	public static void verifyText(AppiumDriver driver, By locator, String expectedText, String elementName) {
-	    String actualText = driver.findElement(locator).getAttribute("content-desc");
-	    if (actualText.trim().equalsIgnoreCase(expectedText.trim())) {
-	        System.out.println("✅ '" + elementName + "' text matched: " + actualText);
-	    } else {
-	        System.err.println("❌ '" + elementName + "' text mismatch. Expected: '" + expectedText + "', but found: '" + actualText + "'");
-	        throw new AssertionError("Text assertion failed for '" + elementName + "'");
-	    }
-	}
+//	public static void verifyText(AppiumDriver driver, By locator, String expectedText, String elementName) {
+//	    String actualText = driver.findElement(locator).getAttribute("content-desc");
+//	    if (actualText.trim().equalsIgnoreCase(expectedText.trim())) {
+//	        System.out.println("✅ '" + elementName + "' text matched: " + actualText);
+//	    } else {
+//	        System.err.println("❌ '" + elementName + "' text mismatch. Expected: '" + expectedText + "', but found: '" + actualText + "'");
+//	        throw new AssertionError("Text assertion failed for '" + elementName + "'");
+//	    }
+//	}
 	
+	public static void assertAll() {
+        softAssert.assertAll(); // Call this at the end of your test method
+    }
+	
+	static SoftAssert softAssert = new SoftAssert(); // Keep this static or manage per test class
+    public static void verifyText(AppiumDriver driver, By locator, String expectedText, String elementName) {
+        String actualText = driver.findElement(locator).getAttribute("content-desc");
+        if (actualText != null && actualText.trim().equalsIgnoreCase(expectedText.trim())) {
+            System.out.println("✅ '" + elementName + "' text matched: " + actualText);
+            softAssert.assertEquals(actualText, expectedText, "Text assertion Passed for '" + elementName + "'");
+        } else {
+            System.err.println("❌ '" + elementName + "' text mismatch. Expected: '" + expectedText + "', but found: '" + actualText + "'");
+            softAssert.assertEquals(actualText, expectedText, "Text assertion failed for '" + elementName + "'");
+        }
+    }
 }

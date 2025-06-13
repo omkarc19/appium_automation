@@ -10,6 +10,7 @@ import base.BasePage;
 import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import utils.LoginDetailsReader;
 import utils.TestUtils;
 
 public class MLoginPage extends BasePage{
@@ -30,9 +31,9 @@ public class MLoginPage extends BasePage{
 //		click(envDropDown);
 //		click(prodEnvoption);
 		click(emailIdTxtBox);
-		sendKeys(emailIdTxtBox, "soubhik111das@gmail.com");
+		sendKeys(emailIdTxtBox, LoginDetailsReader.getProperty("medico.email.id"));
 		click(passwordFieldTxtBox);
-		sendKeys(passwordFieldTxtBox, "Test@456");
+		sendKeys(passwordFieldTxtBox, LoginDetailsReader.getProperty("medico.password"));
 		click(signInBtn);
 
 		TestUtils.verifyText(driver, welcomeText, "Welcome Back", "Welcome Back Text");

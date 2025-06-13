@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>TestNG:  Default test</title>
+<title>TestNG:  Test</title>
 <link href="../testng.css" rel="stylesheet" type="text/css" />
 <link href="../my-testng.css" rel="stylesheet" type="text/css" />
 
@@ -53,13 +53,13 @@ function toggleAllBoxes() {
 
 </head>
 <body>
-<h2 align='center'>Default test</h2><table border='1' align="center">
+<h2 align='center'>Test</h2><table border='1' align="center">
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Fri Jun 13 19:51:26 IST 2025</td>
+<td>Started on:</td><td>Fri Jun 13 17:04:18 IST 2025</td>
 </tr>
-<tr><td>Total time:</td><td>335 seconds (335511 ms)</td>
+<tr><td>Total time:</td><td>122 seconds (122893 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -82,52 +82,27 @@ Build info: version: &apos;4.33.0&apos;, revision: &apos;2c6aaad03a&apos;
 System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;24.0.1&apos;
 Driver info: io.appium.java_client.android.AndroidDriver
 Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.manastik.dadt.MainActivity, appPackage: com.manastik.dadt, autoGrantPermissions: true, automationName: UIAutomator2, noReset: false, platformName: ANDROID, systemPort: 8100, udid: emulator-5556}, appium:deviceApiLevel: 36, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5556, appium:deviceScreenDensity: 420, appium:deviceScreenSize: 1080x2400, appium:deviceUDID: emulator-5556, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:noReset: false, appium:pixelRatio: 2.625, appium:platformVersion: 16, appium:statBarHeight: 132, appium:systemPort: 8100, appium:takesScreenshot: true, appium:udid: emulator-5556, appium:viewportRect: {height: 2268, left: 0, top: 132, width: 1080}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
-Session ID: cabc98ca-2ca1-461c-b0e7-0652a7679853
+Session ID: 8bb75310-89d6-4f70-8411-7a4df992dcee
 	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
 	at base.BasePage.waitForClickability(BasePage.java:29)
 	at base.BasePage.click(BasePage.java:33)
-	at page.medicoPages.MPatientRehabPage.clickNextBtn(MPatientRehabPage.java:24)
-	at tests.TeleConE2ETest.medicoPositiveFlow(TeleConE2ETest.java:127)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at page.medicoPages.MAppointmentDetailsPage.addAppointmentDetails(MAppointmentDetailsPage.java:51)
+	at tests.TeleConE2ETest.medicoPositiveFlow(TeleConE2ETest.java:96)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-	at org.testng.TestRunner.privateRun(TestRunner.java:741)
-	at org.testng.TestRunner.run(TestRunner.java:616)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-	at org.testng.TestNG.runSuites(TestNG.java:1112)
-	at org.testng.TestNG.run(TestNG.java:1079)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1451387509", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1451387509'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: AppiumBy.accessibilityId: Next (tried for 20 second(s) with 500 milliseconds interval)
+... Removed 25 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace79706679", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace79706679'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: AppiumBy.accessibilityId: Next (tried for 20 second(s) with 500 milliseconds interval)
 Build info: version: &apos;4.33.0&apos;, revision: &apos;2c6aaad03a&apos;
 System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;24.0.1&apos;
 Driver info: io.appium.java_client.android.AndroidDriver
 Capabilities {appium:appActivity: com.manastik.dadt.MainActivity, appium:appPackage: com.manastik.dadt, appium:autoGrantPermissions: true, appium:automationName: UIAutomator2, appium:databaseEnabled: false, appium:desired: {appActivity: com.manastik.dadt.MainActivity, appPackage: com.manastik.dadt, autoGrantPermissions: true, automationName: UIAutomator2, noReset: false, platformName: ANDROID, systemPort: 8100, udid: emulator-5556}, appium:deviceApiLevel: 36, appium:deviceManufacturer: Google, appium:deviceModel: sdk_gphone64_x86_64, appium:deviceName: emulator-5556, appium:deviceScreenDensity: 420, appium:deviceScreenSize: 1080x2400, appium:deviceUDID: emulator-5556, appium:javascriptEnabled: true, appium:locationContextEnabled: false, appium:networkConnectionEnabled: true, appium:noReset: false, appium:pixelRatio: 2.625, appium:platformVersion: 16, appium:statBarHeight: 132, appium:systemPort: 8100, appium:takesScreenshot: true, appium:udid: emulator-5556, appium:viewportRect: {height: 2268, left: 0, top: 132, width: 1080}, appium:warnings: {}, appium:webStorageEnabled: false, platformName: ANDROID}
-Session ID: cabc98ca-2ca1-461c-b0e7-0652a7679853
+Session ID: 8bb75310-89d6-4f70-8411-7a4df992dcee
 	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
 	at base.BasePage.waitForClickability(BasePage.java:29)
 	at base.BasePage.click(BasePage.java:33)
-	at page.medicoPages.MPatientRehabPage.clickNextBtn(MPatientRehabPage.java:24)
-	at tests.TeleConE2ETest.medicoPositiveFlow(TeleConE2ETest.java:127)
+	at page.medicoPages.MAppointmentDetailsPage.addAppointmentDetails(MAppointmentDetailsPage.java:51)
+	at tests.TeleConE2ETest.medicoPositiveFlow(TeleConE2ETest.java:96)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -155,8 +130,8 @@ Session ID: cabc98ca-2ca1-461c-b0e7-0652a7679853
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
 </pre></div></td>
-<td>335</td>
-<td>tests.TeleConE2ETest@2b71e916</td></tr>
+<td>122</td>
+<td>tests.TeleConE2ETest@6771beb3</td></tr>
 </table><p>
 </body>
 </html>

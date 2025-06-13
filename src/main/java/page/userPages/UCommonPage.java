@@ -17,7 +17,7 @@ public class UCommonPage extends BasePage{
 	
 	public UCommonPage(AndroidDriver driver) {
 		super(driver);
-	}
+	} 
 	
 	public void acceptMeeting() throws InterruptedException {
 		click(acceptBtn);
