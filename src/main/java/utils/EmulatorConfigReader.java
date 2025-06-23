@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ConfigReader {
+public class EmulatorConfigReader {
 	 private static Properties properties;
 	 static String userHome = System.getProperty("user.home");
 

@@ -1,5 +1,4 @@
-// base/BasePage.java
-package base; // Assuming your base package is 'base'
+    package base; 
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
@@ -17,13 +16,11 @@ public class BasePage {
 	protected AppiumDriver driver; // This will hold the specific driver for this page object instance
 	protected WebDriverWait wait;
 
-	// Constructor: This is where the driver is "injected"
 	public BasePage(AppiumDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // Default wait time
 	}
 
-	// Common methods that any page object can use
 	protected WebElement waitForVisibility(By locator) {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
@@ -33,13 +30,36 @@ public class BasePage {
 	}
 
 	protected void click(By locator) {
+		WebElement elementToClick = waitForClickability(locator);
+        String elementInfo = "";
+        try {
+            String text = elementToClick.getText();
+            if (text != null && !text.isEmpty()) {
+                elementInfo = text;
+            } 
+            else if (driver instanceof AndroidDriver) {
+                String contentDesc = elementToClick.getAttribute("content-desc");
+                if (contentDesc != null && !contentDesc.isEmpty()) {
+                    elementInfo = contentDesc;
+                }
+            }
+            System.out.println("Clicked on - " + elementInfo);
+        } catch (Exception e) {
+            System.out.println("Could not retrieve text or content-desc for element: " + locator + " - " + e.getMessage());
+        }
 		waitForClickability(locator).click();
 	}
 
-	protected void sendKeys(By locator, String text) {
-		waitForVisibility(locator).sendKeys(text);
+	protected void clear(By locator) {
+		waitForClickability(locator).clear();
 	}
-
+	
+	protected void sendKeys(By locator, String text) throws InterruptedException {
+		waitForVisibility(locator).sendKeys(text);
+		System.out.println("Typed - " + text);
+		hideKeyBoard();
+	}
+	
 	protected String getText(By locator) {
 		return waitForVisibility(locator).getText();
 	}
@@ -52,19 +72,23 @@ public class BasePage {
 		}
 	}
 
-	protected void hideKeyBoard() {
-		((AndroidDriver) driver).hideKeyboard();
+	protected void hideKeyBoard() throws InterruptedException {
+		System.out.println("Hiding keyboard");
+		Thread.sleep(500);
+		try {
+			((AndroidDriver) driver).hideKeyboard();
+			System.out.println("Keyboard hidden");
+		} catch (Exception e) {
+			System.out.println("Got error while hiding keyboard");
+		}
 	}
 
-	/**
-	 * Scrolls the screen until the specified text is visible. This method is
-	 * primarily designed for Android using UiAutomator2's UiScrollable.
-	 *
-	 * @param text       The text string to scroll to.
-	 * @param maxScrolls The maximum number of scroll attempts before giving up.
-	 * @return true if the text is found and visible, false otherwise.
-	 * @throws RuntimeException if the driver is not an AndroidDriver.
-	 */
+
+//	 * Scrolls the screen until the specified text is visible. 
+//	 * @param text       The text string to scroll to.
+//	 * @param maxScrolls The maximum number of scroll attempts before giving up.
+//	 * @return true if the text is found and visible, false otherwise.
+
 	public boolean scrollToText(String text, int maxScrolls) {
 		if (!(driver instanceof AndroidDriver)) {
 			throw new RuntimeException("scrollToText method is currently only supported for AndroidDriver.");

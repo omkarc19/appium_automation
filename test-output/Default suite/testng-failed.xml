@@ -5,9 +5,9 @@
     <classes>
       <class name="tests.TeleConE2ETest">
         <methods>
-          <include name="setup"/>
           <include name="medicoPositiveFlow"/>
           <include name="teardown"/>
+          <include name="setup"/>
         </methods>
       </class> <!-- tests.TeleConE2ETest -->
     </classes>
