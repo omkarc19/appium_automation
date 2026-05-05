@@ -9,6 +9,8 @@ import base.BasePage;
 import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import utils.EmulatorConfigReader;
+import utils.LoginDetailsReader;
 import utils.TestUtils;
 
 public class ULoginPage extends BasePage{
@@ -19,6 +21,7 @@ public class ULoginPage extends BasePage{
 	private By passwordFieldTxtBox = By.xpath("//android.widget.EditText[@hint='Password\nPassword']");
 	private By signInBtn = AppiumBy.accessibilityId("Sign In");
 	private By welcomeText = AppiumBy.accessibilityId("Welcome Back");
+	private By homePageText = AppiumBy.accessibilityId("Features");
 
 	public ULoginPage(AndroidDriver driver) {
 		super(driver);
@@ -30,12 +33,14 @@ public class ULoginPage extends BasePage{
 //		click(envDropDown);
 //		click(prodEnvoption);
 		click(emailIdTxtBox);
-		sendKeys(emailIdTxtBox, "vishnu.kumar@manastik.com");
+		sendKeys(emailIdTxtBox, LoginDetailsReader.getProperty("user.email.id"));
 		hideKeyBoard();
 		click(passwordFieldTxtBox);
-		sendKeys(passwordFieldTxtBox, "Test@123");
+		sendKeys(passwordFieldTxtBox, LoginDetailsReader.getProperty("user.password"));
 		hideKeyBoard();
 		click(signInBtn);
+		TestUtils.verifyText(driver, homePageText, "Features", "Home Page Text");
+//		TestUtils.assertAll();
 	}
 
 }

@@ -9,6 +9,7 @@ import base.BasePage;
 import base.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import utils.TestUtils;
 
 public class UBookAppointmentPage extends BasePage{
 	private By calendarOption =AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.Button\").instance(1)");
@@ -17,6 +18,7 @@ public class UBookAppointmentPage extends BasePage{
 	private By timeSlot = By.xpath("//android.view.View[@content-desc=\"Select the time slot\"]/following-sibling::android.view.View");
 	private By bookBtn = AppiumBy.accessibilityId("Book");
 	private By closeBtn = By.xpath("//android.widget.Button");
+	private By appopintmentsuccessText = AppiumBy.accessibilityId("Appointment Requested");
 			
 	public UBookAppointmentPage(AndroidDriver driver) {
 		super(driver);
@@ -30,6 +32,7 @@ public class UBookAppointmentPage extends BasePage{
 		click(bookBtn);
 		Thread.sleep(1000);
 		click(bookBtn);
+		TestUtils.verifyText(driver, appopintmentsuccessText, "Appointment Requested", "Appointment Requested Text");
 		click(closeBtn);
 	}
 

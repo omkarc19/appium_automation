@@ -8,7 +8,7 @@ import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
-import utils.ConfigReader;
+import utils.EmulatorConfigReader;
 
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.interactions.Actions;
@@ -35,7 +35,7 @@ public class DriverManager {
 
 	@BeforeSuite
 	public void setup() throws MalformedURLException, InterruptedException {
-		String platformName = ConfigReader.getProperty("platformName");
+		String platformName = EmulatorConfigReader.getProperty("platformName");
 		if (platformName.equalsIgnoreCase("Android")) {
 			setupUserDriver();
 			setupMedicoDriver();
@@ -51,7 +51,7 @@ public class DriverManager {
 		String os = System.getProperty("os.name").toLowerCase();
 		String appiumPath;
 		if (os.contains("win")) {
-			appiumPath = userHome + ConfigReader.getProperty("appium.js.path");
+			appiumPath = userHome + EmulatorConfigReader.getProperty("appium.js.path");
 		} else {
 			appiumPath = "\\usr\\local\\lib\\node_modules\\appium\\build\\lib\\main.js";
 		}
@@ -64,8 +64,8 @@ public class DriverManager {
 	}
 	
 	public void startMedicoAppiumServer() {
-		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
-		int appiumServerPort1 = Integer.parseInt(ConfigReader.getProperty("appium.server1.port"));
+		String appiumServerIp = EmulatorConfigReader.getProperty("appium.server.ip");
+		int appiumServerPort1 = Integer.parseInt(EmulatorConfigReader.getProperty("appium.server1.port"));
 
 		medicoService = new AppiumServiceBuilder().withAppiumJS(new File(getAppiumMainJsPath()))
 				.withIPAddress(appiumServerIp).usingPort(appiumServerPort1)
@@ -76,8 +76,8 @@ public class DriverManager {
 
 	public void startUserAppiumServer() {
 
-		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
-		int appiumServerPort2 = Integer.parseInt(ConfigReader.getProperty("appium.server2.port"));
+		String appiumServerIp = EmulatorConfigReader.getProperty("appium.server.ip");
+		int appiumServerPort2 = Integer.parseInt(EmulatorConfigReader.getProperty("appium.server2.port"));
 
 		userService = new AppiumServiceBuilder().withAppiumJS(new File(getAppiumMainJsPath()))
 				.withIPAddress(appiumServerIp).usingPort(appiumServerPort2)
@@ -90,13 +90,13 @@ public class DriverManager {
 		startMedicoAppiumServer();
 		Thread.sleep(3000);
 
-		String driver1Udid = ConfigReader.getProperty("android.driver1.udid");
-		int driver1SystemPort = Integer.parseInt(ConfigReader.getProperty("android.driver1.systemPort"));
-		String appPackage = ConfigReader.getProperty("app.package");
-		String appActivity = ConfigReader.getProperty("app.activity");
-		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
-		int appiumServerPort1 = Integer.parseInt(ConfigReader.getProperty("appium.server1.port"));
-		boolean setNoReset1 = Boolean.parseBoolean(ConfigReader.getProperty("setNoReset1"));
+		String driver1Udid = EmulatorConfigReader.getProperty("android.driver1.udid");
+		int driver1SystemPort = Integer.parseInt(EmulatorConfigReader.getProperty("android.driver1.systemPort"));
+		String appPackage = EmulatorConfigReader.getProperty("app.package");
+		String appActivity = EmulatorConfigReader.getProperty("app.activity");
+		String appiumServerIp = EmulatorConfigReader.getProperty("appium.server.ip");
+		int appiumServerPort1 = Integer.parseInt(EmulatorConfigReader.getProperty("appium.server1.port"));
+		boolean setNoReset1 = Boolean.parseBoolean(EmulatorConfigReader.getProperty("setNoReset1"));
 		
 		UiAutomator2Options options = 
 				new UiAutomator2Options()
@@ -131,13 +131,13 @@ public class DriverManager {
 		startUserAppiumServer();
 		Thread.sleep(3000);
 
-		String driver2Udid = ConfigReader.getProperty("android.driver2.udid");
-		int driver2SystemPort = Integer.parseInt(ConfigReader.getProperty("android.driver2.systemPort"));
-		String appPackage = ConfigReader.getProperty("app.package");
-		String appActivity = ConfigReader.getProperty("app.activity");
-		String appiumServerIp = ConfigReader.getProperty("appium.server.ip");
-		int appiumServerPort2 = Integer.parseInt(ConfigReader.getProperty("appium.server2.port"));
-		boolean setNoReset2 = Boolean.parseBoolean(ConfigReader.getProperty("setNoReset2"));
+		String driver2Udid = EmulatorConfigReader.getProperty("android.driver2.udid");
+		int driver2SystemPort = Integer.parseInt(EmulatorConfigReader.getProperty("android.driver2.systemPort"));
+		String appPackage = EmulatorConfigReader.getProperty("app.package");
+		String appActivity = EmulatorConfigReader.getProperty("app.activity");
+		String appiumServerIp = EmulatorConfigReader.getProperty("appium.server.ip");
+		int appiumServerPort2 = Integer.parseInt(EmulatorConfigReader.getProperty("appium.server2.port"));
+		boolean setNoReset2 = Boolean.parseBoolean(EmulatorConfigReader.getProperty("setNoReset2"));
 		
 		UiAutomator2Options options1 = 
 				new UiAutomator2Options()
