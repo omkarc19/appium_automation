@@ -1,0 +1,153 @@
+name: PR Sandbox
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+# Cancel in-flight test runs for the same PR when a new commit is pushed.
+# 'closed' events are not cancelled so cleanup always runs.
+concurrency:
+  group: pr-sandbox-${{ github.event.pull_request.number }}
+  cancel-in-progress: ${{ github.event.action != 'closed' }}
+
+jobs:
+  # ── Spin up sandbox, run tests, post results ────────────────────────────────
+  test:
+    name: Sandbox & Test
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      BRANCH:    ${{ github.head_ref }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Spin up sandbox
+        id: sandbox
+        run: |
+          output=$(ssh \
+            -i ~/.ssh/deploy_key \
+            "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
+            "bash /opt/sandbox-testing/scripts/sandbox.sh up $PR_NUMBER '$BRANCH'")
+          echo "$output"
+          echo "url=$(echo "$output"  | grep '^SANDBOX_URL='  | cut -d= -f2-)" >> "$GITHUB_OUTPUT"
+          echo "port=$(echo "$output" | grep '^SANDBOX_PORT=' | cut -d= -f2-)" >> "$GITHUB_OUTPUT"
+
+      - name: Run integration tests
+        id: integration
+        run: |
+          set +e
+          ssh \
+            -i ~/.ssh/deploy_key \
+            "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
+            "cd /opt/sandboxes/pr-$PR_NUMBER && \
+             PORT=${{ steps.sandbox.outputs.port }} \
+             DATABASE_URL=sqlite:/opt/sandboxes/pr-$PR_NUMBER/sandbox-pr$PR_NUMBER.db \
+             NODE_ENV=test \
+             npx jest --config jest.integration.config.js --forceExit 2>&1"
+          exit_code=$?
+          set -e
+          echo "passed=$([[ $exit_code -eq 0 ]] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "exit_code=$exit_code" >> "$GITHUB_OUTPUT"
+
+      - name: Run E2E tests
+        id: e2e
+        run: |
+          response=$(curl -sf \
+            --max-time 300 \
+            -X POST \
+            -H "Authorization: Bearer ${{ secrets.E2E_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"sandbox_url\":\"${{ steps.sandbox.outputs.url }}\",\"pr\":$PR_NUMBER,\"branch\":\"$BRANCH\"}" \
+            "${{ secrets.E2E_RUNNER_URL }}/run" \
+          || echo '{"passed":false,"report_url":""}')
+          echo "passed=$(echo    "$response" | jq -r '.passed    // false')" >> "$GITHUB_OUTPUT"
+          echo "report_url=$(echo "$response" | jq -r '.report_url // ""')"  >> "$GITHUB_OUTPUT"
+
+      - name: Post PR comment
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const integrationPassed = '${{ steps.integration.outputs.passed }}' === 'true';
+            const e2ePassed         = '${{ steps.e2e.outputs.passed }}'         === 'true';
+            const allPassed         = integrationPassed && e2ePassed;
+            const sandboxUrl        = '${{ steps.sandbox.outputs.url }}';
+            const reportUrl         = '${{ steps.e2e.outputs.report_url }}';
+
+            const row = (label, ok) => `| ${label} | ${ok ? '✅ Pass' : '❌ Fail'} |`;
+
+            const body = [
+              `## ${allPassed ? '✅' : '❌'} PR Sandbox Test Results`,
+              '',
+              '| Check | Result |',
+              '|---|---|',
+              row('Integration Tests', integrationPassed),
+              row('E2E Tests',         e2ePassed),
+              '',
+              `**Sandbox URL:** \`${sandboxUrl}\``,
+              reportUrl ? `**E2E Report:** ${reportUrl}` : null,
+              '',
+              '_Sandbox is destroyed automatically when this PR is closed._',
+            ].filter(l => l !== null).join('\n');
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const existing = comments.find(c =>
+              c.user.type === 'Bot' &&
+              c.body.includes('PR Sandbox Test Results')
+            );
+
+            const params = {
+              owner: context.repo.owner,
+              repo:  context.repo.repo,
+              body,
+            };
+
+            if (existing) {
+              await github.rest.issues.updateComment({ ...params, comment_id: existing.id });
+            } else {
+              await github.rest.issues.createComment({ ...params, issue_number: context.issue.number });
+            }
+
+      - name: Fail if any tests failed
+        if: steps.integration.outputs.passed != 'true' || steps.e2e.outputs.passed != 'true'
+        run: |
+          echo "Tests failed — blocking merge."
+          exit 1
+
+  # ── Tear down sandbox on PR close ───────────────────────────────────────────
+  cleanup:
+    name: Destroy Sandbox
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+
+    steps:
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Tear down sandbox
+        run: |
+          ssh \
+            -i ~/.ssh/deploy_key \
+            "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
+            "bash /opt/sandbox-testing/scripts/sandbox.sh down $PR_NUMBER"
